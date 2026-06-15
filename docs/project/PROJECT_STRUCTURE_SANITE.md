@@ -32,7 +32,8 @@ project-root/
 │     └─ sections.css         ← layout từng section + menu/modal + motion map + responsive
 ├─ assets/
 │  ├─ brand/                  ← sanite-logo.png, sanite-logo-square.png
-│  ├─ gallery/                ← sanite-interior.png
+│  ├─ gallery/                ← sanite-interior.png + ảnh không gian
+│  │  └─ hero/README.md       ← quy tắc thêm ảnh hero/banner thật
 │  ├─ references/             ← xanh-phu-quy.png (reference màu emerald)
 │  └─ menu/                   ← README.md + ảnh món ăn thật (thêm sau)
 ├─ docs/
@@ -63,7 +64,8 @@ Mọi component/hook export qua `Object.assign(window, {...})` ở cuối mỗi 
 | CSS | `src/styles/index.css`, `src/styles/sections.css` |
 | JS | `src/hooks/hooks.jsx`, `src/sections/sections-a.jsx`, `-b.jsx`, `-c.jsx` |
 | Logo | `assets/brand/sanite-logo.png` (navbar/overlay/footer/preloader), `assets/brand/sanite-logo-square.png` (để favicon/OG — Prompt 04) |
-| Ảnh nội thất | `assets/gallery/sanite-interior.png` (hero + gallery) |
+| Ảnh nội thất | `assets/gallery/sanite-interior.png` (hero slide đầu tiên) |
+| Ảnh hero thêm sau | `assets/gallery/hero/` (chỉ thêm vào `HERO_SLIDES` khi file thật tồn tại) |
 | Reference màu | `assets/references/xanh-phu-quy.png` (không nhúng trực tiếp) |
 | Ảnh món | `assets/menu/` (chưa có ảnh thật) |
 
@@ -77,6 +79,7 @@ Mọi component/hook export qua `Object.assign(window, {...})` ở cuối mỗi 
 - KHÔNG tạo `src` giả / KHÔNG ảnh internet cho món ăn.
 - Menu image chỉ hiện khi field `image` có đường dẫn thật. Rỗng → KHÔNG render `<img>`, không broken image.
 - Thêm ảnh món: bỏ file vào `assets/menu/` theo `assets/menu/README.md`, điền field `image` trong `MENU_ITEMS` (`src/sections/sections-b.jsx`).
+- Hero slider dùng mảng `HERO_SLIDES` trong `src/sections/sections-a.jsx`. Chỉ thêm ảnh từ `assets/gallery/hero/` nếu file thật đã tồn tại. Quy tắc tên/kích thước nằm trong `assets/gallery/hero/README.md`.
 
 ## 7. Quy tắc preloader ("Sanité Lotus Opening")
 - Component `Preloader` ở `src/sections/sections-a.jsx`, render đầu tiên trong `App`.
@@ -97,6 +100,14 @@ Mọi component/hook export qua `Object.assign(window, {...})` ở cuối mỗi 
 - Kiểm: preloader xuất hiện rồi biến mất, header/hero/menu/modal/lotus/CTA/gallery/footer, `scrollWidth===clientWidth`, broken image = 0, console error = 0, CSS/JS/asset load 200.
 - Công cụ: local server (`python -m http.server`) + Playwright (Chromium headless) chụp screenshot.
 
-## 10. Không làm ở giai đoạn này (để Prompt 04)
-Vite/build production · `.gitignore`/`.vercelignore` · favicon/OG/Twitter/canonical · nén ảnh ·
-`git init` · deploy QA · gắn ảnh món thật vào `assets/menu/`.
+## 10. Prompt 04 — Git, ignore và deploy readiness
+- Repo branch chính: `main`.
+- Remote GitHub: `https://github.com/KentTho/sanite_vegetarian-_restaurant.git`.
+- `.gitignore` loại `report/`, backups/screenshots, `.vercel/`, env files, `node_modules/`, cache, cấu hình IDE/cục bộ và artifact QA.
+- `.vercelignore` loại `report/`, `archive/`, `docs/references/`, `.env*`, cache, IDE/cục bộ và artifact QA; vẫn giữ `index.html`, `sanite-chay.html`, `src/`, `assets/`, `docs/project/`, `docs/criteria/`.
+- Website hiện là static HTML + React/Babel CDN, **không có build command**. Khi deploy Vercel, dùng project root `./`, framework Other/static, build/output command để trống.
+- Prompt 04 đã push GitHub PASS (`fe2e7ca`). Vercel deploy chưa hoàn tất do CLI chưa có phiên đăng nhập/token an toàn trên máy.
+
+## 11. Việc còn lại
+Vite/build production nếu cần tối ưu performance · favicon/OG/Twitter/canonical · nén ảnh ·
+đăng nhập Vercel CLI và deploy · production QA · gắn thêm ảnh món/ảnh hero thật.

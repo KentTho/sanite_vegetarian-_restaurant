@@ -64,3 +64,15 @@ Trong ngày 2026-06-13, dự án **chính thức chuyển sang thư mục/giao d
 - **QA:** đã static validation + browser QA cả `index.html` và `sanite-chay.html`, chụp screenshot evidence trong `report/screenshots/prompt03/`. Xem `report/PROMPT_03_PROJECT_ORGANIZATION_PRELOADER_MOTION.md`.
 - **Ghi chú resume:** Prompt 03 từng bị dừng giữa chừng do lỗi *API Error: Overloaded*. Đã resume bằng **Prompt 03R** và hoàn tất phần còn dở (docs update + static validation + browser QA + screenshots + report).
 - **Chưa làm (để Prompt 04):** Vite/production build, `.gitignore`/`.vercelignore`, favicon/OG/Twitter/canonical, nén ảnh, `git init`, deploy QA, gắn ảnh món thật vào `assets/menu/`.
+
+## 8. Prompt 04 — Hero slider, copy tightening, GitHub & Vercel deploy (2026-06-15)
+- **Hero slider:** đã chuẩn bị hệ `HERO_SLIDES` trong `src/sections/sections-a.jsx`, hiện chỉ render ảnh thật `assets/gallery/sanite-interior.png`; khi có từ 2 ảnh thật sẽ auto-play, crossfade, dot click và pause khi hover/focus. Không trỏ tới file chưa tồn tại.
+- **Overlay emerald:** đã thêm overlay radial-gradient xanh phú quý từ góc dưới trái hero frame, có gold glow nhẹ và breathing wave; mobile/reduced-motion giảm hoặc tắt animation.
+- **Copy tightening:** đã rút gọn Hero, Story, Experience, Menu, Gallery, Reviews, Visit, FinalCTA và Footer theo `insight_sanite.md`; giữ tiếng Việt, thông tin Phú Nhuận, 46 Trương Quốc Dung, 10:00-22:00, +84 978 323 232, 4.7/5 - 331 đánh giá, 200.000đ-300.000đ/người và món nổi bật.
+- **Preloader timing:** tăng thời gian hiển thị lên `2800ms` + fade `700ms` (tổng khoảng 3.5s); reduced-motion dùng `1000ms` + `250ms`.
+- **Ignore files:** đã tạo `.gitignore` và `.vercelignore`; `report/`, backups, screenshots, `.vercel/`, env files, `node_modules/`, cache và artifact QA không bị commit/deploy.
+- **Local QA:** PASS bằng Playwright headless trên `index.html` và `sanite-chay.html`, các breakpoint 1440, 1366, 768, 430, 390, 360; 0 console/page/request error, 0 broken image, không overflow/cắt chữ, modal menu không có "Gọi đặt món".
+- **Screenshot evidence:** lưu tại `report/screenshots/prompt04/` (ignored khỏi git).
+- **GitHub:** remote `https://github.com/KentTho/sanite_vegetarian-_restaurant.git`, branch `main`, commit đầu `fe2e7ca`, push PASS.
+- **Vercel:** BLOCKED. `vercel` global chưa cài; `npx vercel` chạy được nhưng `deploy`, `whoami`, `login` đều treo không xuất auth prompt. Không có `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID` trong env. Vì vậy chưa có preview URL/production URL và chưa thể production QA.
+- **Trạng thái:** Prompt 04 code + local QA + GitHub push PASS; Vercel deploy cần đăng nhập Vercel CLI hoặc cung cấp token qua cơ chế an toàn ngoài chat.
