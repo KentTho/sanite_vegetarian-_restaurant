@@ -108,6 +108,10 @@ Trong ngày 2026-06-13, dự án **chính thức chuyển sang thư mục/giao d
 - **Static validation:** CSS braces cân bằng (index 151/151, sections 350/350); không console.log; không src lỗi.
 - **Không làm:** không cài shadcn/Tailwind/TS/lucide, không thêm dependency, không ảnh internet/placeholder, không deploy Vercel, không force push, không commit report/screenshots/backups.
 
+### Prompt 08d — Story lotus bỏ border, hòa quyện vào nền (2026-06-15)
+- Theo yêu cầu: **bỏ viền/khung + box-shadow** ở ảnh `hoasen.jpg` (Story), đổi mask sang `radial-gradient` để ảnh **hòa tan vào nền kem** (đậm mép phải, mờ dần các rìa). Giữ nguyên vị trí phải, tông màu, layout.
+- QA Playwright 6 breakpoint × 2 trang PASS: overflow=0, broken=0, console/req err=0; `border=0px`, `box-shadow:none`, mask radial. Screenshot `report/screenshots/prompt08d/`.
+
 ### Prompt 08c — Story lotus chuyển sang PHẢI + khung bo cong, cao bằng Story (2026-06-15)
 - Theo yêu cầu: chuyển ảnh `hoasen.jpg` từ trái sang **bên phải** Story (`right:0; top:0; bottom:0; left:auto` → cao bằng Story, KHÔNG lấn lên Hero); thêm **khung bo cong** `border-radius:44px 0 0 44px` + viền gold mềm; mask đổi sang mờ cạnh trái. Giữ nguyên tông màu + layout (cards, text). Responsive desktop/tablet/mobile cùng neo phải.
 - QA Playwright 6 breakpoint × 2 trang PASS: overflow=0, broken=0, console/req err=0; ảnh flush phải, top/bottom khớp Story (không lấn Hero), border-radius 44px; cards/text vẫn đọc rõ. Screenshot `report/screenshots/prompt08c/`.
