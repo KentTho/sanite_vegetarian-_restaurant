@@ -131,12 +131,26 @@ function Navbar() {
 }
 
 /* ---------- Hero ---------- */
+/* PROMPT 06 — bổ sung ảnh thật từ assets/banner/ (banner_1.jpg, banner_2.jpg đã audit tồn tại).
+   Chỉ liệt kê file thật; slide đầu là ảnh nội thất chính. >1 slide -> autoplay + crossfade + dots. */
 const HERO_SLIDES = [
   {
     id: 'interior-main',
     src: 'assets/gallery/sanite-interior.png',
     alt: 'Không gian ấm áp bên trong nhà hàng chay Sanité',
     label: 'Không gian ấm áp'
+  },
+  {
+    id: 'banner-1',
+    src: 'assets/banner/banner_1.jpg',
+    alt: 'Mặt tiền nhà hàng chay Sanité về đêm với ánh đèn ấm',
+    label: 'Mặt tiền Sanité'
+  },
+  {
+    id: 'banner-2',
+    src: 'assets/banner/banner_2.jpg',
+    alt: 'Góc bàn ăn tinh tế tại Sanité',
+    label: 'Góc bàn ăn'
   }
 ];
 const HERO_SLIDE_INTERVAL_MS = 5400;

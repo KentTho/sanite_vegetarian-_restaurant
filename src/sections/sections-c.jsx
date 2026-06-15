@@ -161,6 +161,7 @@ function ReviewsSection() {
 
 /* ---------- SECTION 7 — VISIT ---------- */
 function VisitSection() {
+  const buddhaRef = useReveal({ once: true, threshold: 0.12 });
   const INFO = [
     { t: 'Địa chỉ', v: '46 Trương Quốc Dung,\nPhú Nhuận, Hồ Chí Minh', cta: { label: 'Mở Google Maps', href: SANITE.maps, ext: true } },
     { t: 'Giờ mở cửa', v: '10:00 – 22:00', sub: 'Tất cả các ngày trong tuần' },
@@ -169,8 +170,11 @@ function VisitSection() {
   ];
   return (
     <section id="contact" className="section plaster visit">
-      {/* PROMPT 05 — Đức Phật line-art mờ ở bên phải, gợi an yên, không che CTA */}
-      <BuddhaOrnament className="visit-buddha" />
+      {/* PROMPT 06 — ảnh thật Đức Phật (assets/adidaphat.jpg) làm ambience bên phải Visit.
+          Decorative: alt rỗng + aria-hidden + pointer-events none; mask/filter để tan vào nền. */}
+      <div ref={buddhaRef} className="visit-buddha-photo" aria-hidden="true">
+        <img src="assets/adidaphat.jpg" alt="" loading="lazy" decoding="async" />
+      </div>
       <div className="wrap">
         <Reveal><p className="eyebrow" style={{ color: 'var(--sanite-gold)' }}>Ghé thăm</p></Reveal>
         <Reveal delay={100} as="h2" className="visit-h2">Ghé Sanité tại Phú Nhuận</Reveal>

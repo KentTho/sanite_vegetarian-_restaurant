@@ -233,46 +233,6 @@ function LotusBranch({ className = '' }) {
   );
 }
 
-/* ---- Buddha ornament (decorative) — PROMPT 05 ----
-   Đức Phật line-art nghiêng (gương mặt khép mắt, an yên), lấy cảm hứng từ ảnh reference
-   assets/adidaphat.jpg. KHÔNG dùng ảnh thật/photorealistic → vẽ inline SVG.
-   - Gọi qua <BuddhaOrnament className="visit-buddha" /> ở bên phải Visit.
-   - aria-hidden + pointer-events:none (CSS), z-index thấp hơn nội dung → không che CTA.
-   - Mờ (opacity thấp) nhưng vẫn thấy outline; glow "sunset aura" + breathe ở CSS. */
-function BuddhaOrnament({ className = '' }) {
-  const ref = useReveal({ once: true, threshold: 0.18 });
-  return (
-    <div ref={ref} className={`buddha-ornament ${className}`.trim()} aria-hidden="true">
-      <svg viewBox="0 0 260 340" fill="none" preserveAspectRatio="xMidYMid meet">
-        {/* hào quang / sunset aura */}
-        <circle className="bo-halo" cx="138" cy="118" r="94" stroke="var(--sanite-gold)" strokeWidth="1" />
-        <circle className="bo-halo bo-halo-2" cx="138" cy="118" r="74" stroke="var(--sanite-gold-soft)" strokeWidth="0.8" />
-        {/* silhouette đầu + mặt nghiêng (hướng trái) + vai áo cà sa */}
-        <path className="bo-line" d="M138 24 C156 22 164 38 160 56 C184 62 200 88 200 120 C200 150 192 170 178 184 C176 196 176 206 180 216 C200 222 222 238 232 268 L238 340 L96 340 L100 300 C104 272 116 256 132 244 C140 230 140 214 134 200 C128 194 122 190 116 188 C108 184 100 176 94 166 C100 162 106 160 104 154 C98 150 88 148 80 140 C86 134 96 132 100 126 C96 120 92 114 96 106 C102 96 110 90 114 78 C116 60 118 42 126 32 C129 27 133 24 138 24 Z" stroke="var(--sanite-gold)" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round" />
-        {/* búi tóc ushnisha */}
-        <path className="bo-line" d="M126 32 C128 12 150 12 152 32" stroke="var(--sanite-gold)" strokeWidth="1.4" strokeLinecap="round" />
-        {/* tóc xoăn (chấm tròn nhỏ) */}
-        <g className="bo-curls" stroke="var(--sanite-gold-soft)" strokeWidth="0.9">
-          <circle cx="124" cy="34" r="4" /><circle cx="139" cy="30" r="4" />
-          <circle cx="114" cy="44" r="4" /><circle cx="153" cy="44" r="4" />
-          <circle cx="109" cy="58" r="4" /><circle cx="167" cy="64" r="4" />
-          <circle cx="108" cy="74" r="4" /><circle cx="174" cy="88" r="4" />
-        </g>
-        {/* lông mày + mắt khép + sống mũi gợi ý */}
-        <path className="bo-line" d="M92 102 C99 99 108 99 115 103" stroke="var(--sanite-gold)" strokeWidth="1.2" strokeLinecap="round" />
-        <path className="bo-line" d="M93 112 C100 117 109 117 115 112" stroke="var(--sanite-gold)" strokeWidth="1.2" strokeLinecap="round" />
-        {/* tai dài */}
-        <path className="bo-line" d="M150 106 C168 110 170 142 156 162 C150 152 149 128 150 106 Z" stroke="var(--sanite-gold)" strokeWidth="1.2" strokeLinejoin="round" />
-        {/* urna (điểm giữa trán) */}
-        <circle className="bo-line" cx="111" cy="92" r="2" fill="var(--sanite-gold)" stroke="none" />
-        {/* nếp áo cà sa trên vai */}
-        <path className="bo-line" d="M148 214 C168 222 188 236 198 258" stroke="var(--sanite-gold-soft)" strokeWidth="1" strokeLinecap="round" opacity="0.8" />
-        <path className="bo-line" d="M128 232 C150 240 172 256 184 282" stroke="var(--sanite-gold-soft)" strokeWidth="0.9" strokeLinecap="round" opacity="0.7" />
-      </svg>
-    </div>
-  );
-}
-
 /* ---- Constants ---- */
 const SANITE = {
   phone: '+84 978 323 232',
@@ -285,5 +245,5 @@ const SANITE = {
 Object.assign(window, {
   useState, useEffect, useRef, useCallback,
   useTypewriter, useReveal, Reveal, useCountUp, useMouseParallax, useLockBodyScroll,
-  prefersReduced, isTouch, Leaf, LotusMark, LotusBranch, BuddhaOrnament, SANITE,
+  prefersReduced, isTouch, Leaf, LotusMark, LotusBranch, SANITE,
 });

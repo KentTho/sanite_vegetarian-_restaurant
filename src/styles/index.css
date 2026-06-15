@@ -530,6 +530,22 @@ img { max-width: 100%; display: block; }
 }
 
 /* =========================================================
+   PROMPT 06 — GLOBAL ICON SIZE TUNING
+   Mục tiêu:
+   - Icon rõ hơn (tăng nhẹ ~15–20%)
+   - Không phá spacing/button/nav
+   ========================================================= */
+:root { --icon-sm: 15px; --icon-md: 18px; --icon-lg: 24px; }
+/* leaf accents */
+.fc-eyebrow svg, .footer-tag svg, .reviews-hint svg { width: var(--icon-sm); height: var(--icon-sm); }
+.story-sign svg, .exp-mark svg, .menu-note svg, .dm-note svg { width: var(--icon-md); height: var(--icon-md); }
+/* mũi tên trong CTA/link + copy icon */
+.mc-more svg, .info-link svg, .pill svg { width: 16px; height: 16px; }
+.dish-close svg { width: var(--icon-lg); height: var(--icon-lg); }
+/* dot/marker nhẹ rõ hơn */
+.badge-dot { width: 7px; height: 7px; }
+
+/* =========================================================
    PROMPT 05 — STORY LOTUS BRANCH ORNAMENT
    Mục tiêu:
    - Cành sen nở ở Story
@@ -545,15 +561,22 @@ img { max-width: 100%; display: block; }
 }
 .lotus-branch.is-visible { opacity: 0.55; transform: none; }
 .lotus-branch svg { width: 100%; height: 100%; display: block; overflow: visible; }
-/* gốc cành làm tâm xoay → đung đưa như gió nhẹ */
+.lotus-branch.is-visible.lotus-branch-featured { opacity: 0.78; } /* PROMPT 06 — bản lớn giữa Hero/Story rõ hơn */
+/* glow kem/gold rất nhẹ phía sau hoa (PROMPT 06) */
+.lotus-branch::before {
+  content: ""; position: absolute; inset: -12% -10% 0 -10%; z-index: -1;
+  background: radial-gradient(closest-side, rgba(216,184,136,0.22), rgba(245,241,230,0) 72%);
+  pointer-events: none;
+}
+/* gốc cành làm tâm xoay → đung đưa như gió nhẹ (PROMPT 06: nhẹ hơn vì cành lớn) */
 .lotus-branch-sway {
   transform-box: fill-box;
   transform-origin: 12% 100%;
-  animation: lotusBranchSway 6.5s ease-in-out infinite;
+  animation: lotusBranchSway 8s ease-in-out infinite;
 }
 @keyframes lotusBranchSway {
-  0%, 100% { transform: rotate(-1.5deg) translateY(0); }
-  50%      { transform: rotate(1.8deg) translateY(-3px); }
+  0%, 100% { transform: rotate(-1.1deg) translateY(0); }
+  50%      { transform: rotate(1.3deg) translateY(-3px); }
 }
 /* cánh sen vẽ dần (stroke-dashoffset) + hoa "bloom" khi vào viewport */
 .lotus-branch .lb-petal { stroke-dasharray: 130; stroke-dashoffset: 130; }
@@ -571,41 +594,36 @@ img { max-width: 100%; display: block; }
 }
 
 /* =========================================================
-   PROMPT 05 — VISIT BUDDHA ORNAMENT
+   PROMPT 06 — REAL BUDDHA PHOTO ORNAMENT FOR VISIT
    Mục tiêu:
-   - Đức Phật line-art nhẹ ở Visit
-   - Tạo cảm giác an yên
-   - Không che thông tin liên hệ/CTA
+   - Dùng ảnh thật assets/adidaphat.jpg
+   - Hòa ảnh vào nền Sanité bằng mask/filter/opacity
+   - Không che nội dung/CTA (z-index thấp hơn .wrap, pointer-events none)
    ========================================================= */
-.buddha-ornament {
-  pointer-events: none;
+.visit-buddha-photo {
+  position: absolute; z-index: 0; pointer-events: none;
   opacity: 0;
-  transform: translateY(10px) scale(.98);
-  transition: opacity 1.2s ease, transform 1.2s cubic-bezier(.22,.61,.36,1);
+  transform: translateY(12px) scale(.99);
+  transition: opacity 1.3s ease, transform 1.3s cubic-bezier(.22,.61,.36,1);
 }
-.buddha-ornament.is-visible { opacity: 0.2; transform: none; }
-.buddha-ornament svg { width: 100%; height: 100%; display: block; overflow: visible; }
-/* sunset aura mềm phía sau */
-.buddha-ornament::before {
-  content: ""; position: absolute; inset: -10% -8%; z-index: -1;
-  background: radial-gradient(closest-side, rgba(216,184,136,0.5), rgba(216,184,136,0) 72%);
-  animation: buddhaBreathe 12s ease-in-out infinite;
+.visit-buddha-photo.is-visible { opacity: 0.3; transform: none; }
+.visit-buddha-photo img {
+  width: 100%; height: 100%; object-fit: contain; object-position: center;
+  /* tan dần vào nền: mờ ở rìa */
+  -webkit-mask-image: radial-gradient(circle at 50% 44%, #000 0%, #000 44%, transparent 78%);
+          mask-image: radial-gradient(circle at 50% 44%, #000 0%, #000 44%, transparent 78%);
+  /* breathing glow rất nhẹ qua brightness (không đụng opacity fade-in của container) */
+  animation: buddhaGlow 12s ease-in-out infinite;
 }
-.buddha-ornament .bo-halo {
-  transform-box: fill-box; transform-origin: center;
-  opacity: 0.35; animation: buddhaBreathe 11s ease-in-out infinite;
-}
-.buddha-ornament .bo-halo-2 { animation-duration: 9s; }
-@keyframes buddhaBreathe {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50%      { opacity: 0.55; transform: scale(1.04); }
+@keyframes buddhaGlow {
+  0%, 100% { filter: sepia(0.18) saturate(0.92) brightness(1.05) contrast(0.96); }
+  50%      { filter: sepia(0.16) saturate(0.94) brightness(1.12) contrast(0.96); }
 }
 
-/* Reduced-motion: tắt sway/breathe/bloom, hiện static (đã có khối * ở trên xử lý phần lớn) */
+/* Reduced-motion: tắt sway/bloom/glow, hiện static (đã có khối * ở trên xử lý phần lớn) */
 @media (prefers-reduced-motion: reduce) {
-  .lotus-branch-sway,
-  .buddha-ornament .bo-halo,
-  .buddha-ornament::before { animation: none; }
+  .lotus-branch-sway { animation: none; }
   .lotus-branch .lb-petal { stroke-dashoffset: 0; }
   .lotus-branch .lb-bloom { transform: none; opacity: 1; }
+  .visit-buddha-photo { animation: none; }
 }

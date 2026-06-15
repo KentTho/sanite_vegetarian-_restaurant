@@ -36,8 +36,9 @@ project-root/
 │  │  └─ hero/README.md       ← quy tắc thêm ảnh hero/banner thật
 │  ├─ references/             ← xanh-phu-quy.png (reference màu emerald)
 │  ├─ menu/                   ← README.md + ảnh món ăn thật (thêm sau)
-│  ├─ feedback/               ← README.md + fb_1..fb_5.jpg (ảnh đánh giá thật — Prompt 05)
-│  └─ adidaphat.jpg           ← ảnh reference Đức Phật (Prompt 05, KHÔNG nhúng trực tiếp; ornament vẽ SVG)
+│  ├─ feedback/               ← README.md + fb_1..fb_5.jpg (ảnh đánh giá thật — accordion Reviews)
+│  ├─ banner/                 ← banner_1.jpg, banner_2.jpg (ảnh hero thật — Prompt 06)
+│  └─ adidaphat.jpg           ← ảnh thật Đức Phật, DÙNG làm ambience bên phải Visit (Prompt 06)
 ├─ docs/
 │  ├─ project/                ← PROJECT_STRUCTURE_SANITE.md, SANITE_WORK_HISTORY_2026-06-13.md
 │  ├─ criteria/               ← tieu_chi_landingpage.md, tieu_chi_landing_page.docx
@@ -81,13 +82,15 @@ Mọi component/hook export qua `Object.assign(window, {...})` ở cuối mỗi 
 - KHÔNG tạo `src` giả / KHÔNG ảnh internet cho món ăn.
 - Menu image chỉ hiện khi field `image` có đường dẫn thật. Rỗng → KHÔNG render `<img>`, không broken image.
 - Thêm ảnh món: bỏ file vào `assets/menu/` theo `assets/menu/README.md`, điền field `image` trong `MENU_ITEMS` (`src/sections/sections-b.jsx`).
-- Hero slider dùng mảng `HERO_SLIDES` trong `src/sections/sections-a.jsx`. Chỉ thêm ảnh từ `assets/gallery/hero/` nếu file thật đã tồn tại. Quy tắc tên/kích thước nằm trong `assets/gallery/hero/README.md`.
+- Hero slider dùng mảng `HERO_SLIDES` trong `src/sections/sections-a.jsx`. Chỉ thêm ảnh từ `assets/gallery/hero/` hoặc `assets/banner/` nếu file thật đã tồn tại. **Prompt 06:** đã thêm `assets/banner/banner_1.jpg` + `banner_2.jpg` (3 slide → autoplay + crossfade + dots). Overlay hero đã chuyển tông **sáng** (veil kem/gold + emerald nhẹ góc dưới trái), ảnh `brightness(1.05)`; không dùng emerald đậm gây tối.
 - **Feedback accordion (Prompt 05):** ảnh đánh giá thật ở `assets/feedback/fb_(số).jpg`; chỉ liệt kê file thật trong mảng `FEEDBACK_IMAGES` (`src/sections/sections-c.jsx`). 1 ảnh → 1 card lớn; 2–5 ảnh → accordion; >5 → lấy 5 ảnh đầu. Ảnh lỗi `onError` tự ẩn (KHÔNG ảnh giả). Mảng rỗng → fallback review card chữ, không broken image. Quy tắc tên/nguồn/kích thước trong `assets/feedback/README.md`. Tuyệt đối không dùng ảnh internet/Unsplash/placeholder.
 
-## 6b. Quy tắc ornament line-art (Prompt 05)
-- **Lotus branch (Story):** component `LotusBranch` ở `src/hooks/hooks.jsx`, render `<LotusBranch className="story-lotus-branch" />` góc trên trái `StorySection`. Inline SVG (gold/emerald/hồng sen trầm), gió đung đưa nhẹ (sway, tâm xoay ở gốc cành), hoa bloom khi vào viewport. `aria-hidden` + `pointer-events:none`, `z-index:0` (sau nội dung). `.story` có `overflow:hidden` chống tràn.
-- **Buddha ornament (Visit):** component `BuddhaOrnament` ở `src/hooks/hooks.jsx`, render `<BuddhaOrnament className="visit-buddha" />` bên phải `VisitSection`. Inline SVG line-art (mặt nghiêng, mắt khép, ushnisha, tóc xoăn, tai dài, hào quang + nếp áo) — KHÔNG dùng ảnh thật/photorealistic, lấy cảm hứng từ `assets/adidaphat.jpg`. Mờ (`opacity ~0.2`, glow sunset breathe), `z-index:0` thấp hơn `.wrap`, không che CTA Google Maps/Call. `.visit` có `overflow:hidden`.
-- Cả hai ornament: mobile giảm kích thước/opacity; `prefers-reduced-motion` tắt sway/breathe/bloom, hiện static.
+## 6b. Quy tắc ornament & visual (cập nhật Prompt 06)
+- **Lotus branch (Hero→Story transition):** component `LotusBranch` ở `src/hooks/hooks.jsx`, render `<LotusBranch className="story-lotus-branch story-lotus-branch-featured" />` trong `StorySection`. Inline SVG (gold/emerald/hồng sen trầm), gió đung đưa nhẹ (sway, tâm xoay ở gốc cành), hoa bloom khi vào viewport. **Prompt 06:** phóng lớn (`width clamp(220–340px)`) + đặt ở vùng chuyển giữa Hero và Story (`top` âm để vươn lên), opacity ~0.78, glow kem/gold sau hoa. `.story` đổi `overflow:visible` (cành vươn lên); chống tràn ngang nhờ `body{overflow-x:hidden}` + `left` dương. `aria-hidden` + `pointer-events:none`, `z-index:0`.
+- **Buddha photo (Visit):** Prompt 06 **bỏ SVG `BuddhaOrnament`**, dùng **ảnh thật** `assets/adidaphat.jpg` qua `<div className="visit-buddha-photo"><img alt="" aria-hidden/></div>` bên phải `VisitSection`. Hòa nền bằng `object-fit:contain` + `mask-image` radial (mờ rìa) + filter ấm (`sepia/brightness`), opacity ~0.3 (mobile thấp hơn), `z-index:0` < `.wrap`, `pointer-events:none`; breathing glow qua `brightness`. `.visit` giữ `overflow:hidden`. Không che CTA "Xem đường đi"/Call/Maps.
+- **Feedback images = `object-fit: contain`** (Prompt 06): ảnh review (screenshot dọc) hiển thị **trọn**, không crop chữ; khung kem/emerald + caption chip nhỏ; active card rộng (`flex-grow 5.2`, accordion cao 520px); mobile scroll cards `aspect-ratio 3/4` cũng contain. KHÔNG dùng `cover` cho feedback.
+- **Icon sizing (Prompt 06):** token `--icon-sm:15px / --icon-md:18px / --icon-lg:24px` (index.css); leaf/arrow/copy icon tăng nhẹ qua CSS scope (`.fc-eyebrow svg`, `.story-sign svg`, `.mc-more svg`, `.info-link svg`, `.pill svg`, `.dish-close svg`…), không phá button/nav.
+- Tất cả: mobile giảm kích thước/opacity; `prefers-reduced-motion` tắt sway/bloom/glow, hiện static. KHÔNG ảnh internet/placeholder; chỉ trỏ file thật tồn tại.
 
 ## 7. Quy tắc preloader ("Sanité Lotus Opening")
 - Component `Preloader` ở `src/sections/sections-a.jsx`, render đầu tiên trong `App`.
