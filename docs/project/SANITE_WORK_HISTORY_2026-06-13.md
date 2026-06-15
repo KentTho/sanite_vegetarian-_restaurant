@@ -108,6 +108,10 @@ Trong ngày 2026-06-13, dự án **chính thức chuyển sang thư mục/giao d
 - **Static validation:** CSS braces cân bằng (index 151/151, sections 350/350); không console.log; không src lỗi.
 - **Không làm:** không cài shadcn/Tailwind/TS/lucide, không thêm dependency, không ảnh internet/placeholder, không deploy Vercel, không force push, không commit report/screenshots/backups.
 
+### Prompt 08c — Story lotus chuyển sang PHẢI + khung bo cong, cao bằng Story (2026-06-15)
+- Theo yêu cầu: chuyển ảnh `hoasen.jpg` từ trái sang **bên phải** Story (`right:0; top:0; bottom:0; left:auto` → cao bằng Story, KHÔNG lấn lên Hero); thêm **khung bo cong** `border-radius:44px 0 0 44px` + viền gold mềm; mask đổi sang mờ cạnh trái. Giữ nguyên tông màu + layout (cards, text). Responsive desktop/tablet/mobile cùng neo phải.
+- QA Playwright 6 breakpoint × 2 trang PASS: overflow=0, broken=0, console/req err=0; ảnh flush phải, top/bottom khớp Story (không lấn Hero), border-radius 44px; cards/text vẫn đọc rõ. Screenshot `report/screenshots/prompt08c/`.
+
 ### Prompt 08b — Story lotus sát cạnh trái + sát đáy (2026-06-15)
 - Theo yêu cầu: đổi vị trí ảnh `hoasen.jpg` ở Story sang **sát cạnh trái + sát đáy** section (`top:auto; bottom:0; left:0` cho cả desktop/tablet/mobile), `border-radius:0 46px 0 0` (vuông góc trái & đáy). Giữ nguyên treatment (mask/opacity/filter/scrim) và mọi phần khác.
 - QA Playwright 6 breakpoint × 2 trang PASS: overflow=0, broken=0, console/req err=0, ảnh flush trái (left≈0) + sát đáy Story; chữ/card vẫn đọc rõ. Screenshot `report/screenshots/prompt08b/`.

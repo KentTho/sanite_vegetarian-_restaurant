@@ -557,16 +557,18 @@ img { max-width: 100%; display: block; }
   transform: translateY(16px) scale(.985);
   transition: opacity 1.3s ease, transform 1.3s cubic-bezier(.22,.61,.36,1);
   overflow: hidden;
-  border-radius: 0 46px 0 0; /* PROMPT 08b — vuông góc trái & đáy để sát cạnh Story */
+  /* PROMPT 08c — ảnh bên PHẢI: bo cong cạnh trái (hướng vào nội dung) + viền gold mềm */
+  border-radius: 44px 0 0 44px;
+  border: 1px solid rgba(216,184,136,0.5);
   box-shadow: 0 32px 90px rgba(63,51,45,0.12), 0 0 80px rgba(162,131,90,0.12);
-  /* mờ dần sang phải để hòa vào nền kem */
-  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 54%, transparent 100%);
-          mask-image: linear-gradient(to right, #000 0%, #000 54%, transparent 100%);
 }
 .story-lotus-photo.is-visible { opacity: 0.5; transform: none; }
 .story-lotus-photo img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 42%;
   filter: sepia(0.1) saturate(0.9) brightness(1.05) contrast(0.96);
+  /* mờ nhẹ ở cạnh trái (hướng vào nội dung) để hòa nền, vẫn thấy khung cong */
+  -webkit-mask-image: linear-gradient(to left, #000 0%, #000 82%, transparent 100%);
+          mask-image: linear-gradient(to left, #000 0%, #000 82%, transparent 100%);
   animation: lotusBackdropFloat 11s ease-in-out infinite;
 }
 @keyframes lotusBackdropFloat {

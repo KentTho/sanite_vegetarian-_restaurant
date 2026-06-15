@@ -678,10 +678,9 @@
    ========================================================= */
 .story-lotus-photo {
   position: absolute; z-index: 0; pointer-events: none;
-  /* PROMPT 08b — sát cạnh trái + sát đáy Story */
-  top: auto; bottom: 0; left: 0;
-  width: clamp(360px, 36vw, 620px);
-  height: clamp(620px, 78vh, 900px);
+  /* PROMPT 08c — bên PHẢI, cao bằng Story (top:0/bottom:0), KHÔNG lấn lên Hero */
+  top: 0; bottom: 0; right: 0; left: auto;
+  width: clamp(320px, 34vw, 560px);
 }
 /* scrim cream sau chữ Story để đọc rõ trên nền ảnh, vẫn để ảnh hiện về phải */
 .story-left { position: relative; z-index: 1; }
@@ -766,8 +765,8 @@
 /* --- Tablet --- */
 @media (max-width: 860px) {
   /* PROMPT 07 — ornament vẫn THẤY RÕ trên mobile: tăng size/opacity + glow drop-shadow */
-  .story-lotus-photo { width: clamp(320px, 58vw, 480px); height: clamp(420px, 54vw, 560px); top: auto; bottom: 0; left: 0; }
-  .story-lotus-photo.is-visible { opacity: 0.42; }
+  .story-lotus-photo { width: clamp(260px, 48vw, 420px); top: 0; bottom: 0; right: 0; left: auto; }
+  .story-lotus-photo.is-visible { opacity: 0.4; }
   /* Buddha lên góc phải TRÊN (tránh bị map-card đậm che khuất ở đáy) */
   .visit-buddha-photo { width: clamp(220px, 50vw, 300px); top: clamp(8px, 5vw, 78px); bottom: auto; right: -48px; }
   .visit-buddha-photo.is-visible { opacity: 0.24; }
@@ -794,8 +793,8 @@
 
 /* --- Mobile --- */
 @media (max-width: 560px) {
-  .story-lotus-photo { width: 92vw; height: 380px; top: auto; bottom: 0; left: 0; }
-  .story-lotus-photo.is-visible { opacity: 0.36; }
+  .story-lotus-photo { width: clamp(200px, 60vw, 320px); top: 0; bottom: 0; right: 0; left: auto; }
+  .story-lotus-photo.is-visible { opacity: 0.3; }
   .visit-buddha-photo { width: clamp(190px, 56vw, 260px); top: 6px; right: -52px; bottom: auto; }
   .visit-buddha-photo.is-visible { opacity: 0.22; }
   .fb-item,
@@ -804,5 +803,5 @@
 }
 
 @media (max-width: 360px) {
-  .story-lotus-photo { width: 96vw; height: 340px; top: auto; bottom: 0; }
+  .story-lotus-photo { width: 64vw; top: 0; bottom: 0; right: 0; }
 }
