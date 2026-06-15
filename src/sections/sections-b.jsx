@@ -12,6 +12,8 @@ const STORY_CARDS = [
 function StorySection() {
   return (
     <section id="story" className="section plaster story">
+      {/* PROMPT 05 — cành hoa sen nở góc trên trái, gió đung đưa nhẹ (decorative) */}
+      <LotusBranch className="story-lotus-branch" />
       <div className="wrap story-grid">
         <div className="story-left">
           <Reveal><p className="eyebrow" style={{ color: 'var(--sanite-gold)' }}>Câu chuyện Sanité</p></Reveal>

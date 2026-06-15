@@ -48,8 +48,62 @@ const REVIEWS = [
   { q: 'Món chay đậm đà, sáng tạo từ nấm và rau củ.', l: 'Ẩm thực' },
 ];
 
+/* =========================================================
+   PROMPT 05 — REVIEWS FEEDBACK IMAGE ACCORDION (data)
+   Chỉ liệt kê ẢNH THẬT đang tồn tại trong assets/feedback/.
+   (Đã kiểm bằng shell: fb_1..fb_5 đều có thật.)
+   Mảng rỗng -> Reviews fallback về review card chữ, không broken image. */
+const FEEDBACK_IMAGES = [
+  { id: 1, title: 'Không gian ấm áp', src: 'assets/feedback/fb_1.jpg' },
+  { id: 2, title: 'Món chay sáng tạo', src: 'assets/feedback/fb_2.jpg' },
+  { id: 3, title: 'Phục vụ tận tâm', src: 'assets/feedback/fb_3.jpg' },
+  { id: 4, title: 'Bữa ăn trọn vẹn', src: 'assets/feedback/fb_4.jpg' },
+  { id: 5, title: 'Khách hàng yêu mến', src: 'assets/feedback/fb_5.jpg' },
+];
+
+/* Accordion ảnh feedback: desktop hover/focus mở rộng item active; mobile scroll cards (CSS).
+   onError -> ẩn item lỗi (KHÔNG thay ảnh giả). 1 ảnh -> 1 card lớn; 2–5 ảnh -> accordion. */
+function FeedbackAccordion({ images }) {
+  const [active, setActive] = useState(0);
+  const [errored, setErrored] = useState({});
+  const shown = images.filter((img) => !errored[img.id]);
+  if (shown.length === 0) return null;
+  const safeActive = Math.min(active, shown.length - 1);
+  return (
+    <div className={`fb-accordion ${shown.length === 1 ? 'is-single' : ''}`}>
+      {shown.map((img, i) => (
+        <button
+          key={img.id}
+          type="button"
+          className={`fb-item ${i === safeActive ? 'is-active' : ''}`}
+          aria-label={`Đánh giá khách hàng: ${img.title}`}
+          aria-pressed={i === safeActive}
+          onMouseEnter={() => setActive(i)}
+          onFocus={() => setActive(i)}
+          onClick={() => setActive(i)}
+        >
+          <img
+            src={img.src}
+            alt={`Ảnh đánh giá khách hàng Sanité — ${img.title}`}
+            loading="lazy"
+            decoding="async"
+            onError={() => setErrored((p) => ({ ...p, [img.id]: true }))}
+          />
+          <span className="fb-overlay" aria-hidden="true" />
+          <span className="fb-caption">
+            <span className="fb-caption-dot" aria-hidden="true" />
+            <span className="fb-caption-text">{img.title}</span>
+          </span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function ReviewsSection() {
   const [rating, ratingRef] = useCountUp(4.7, { decimals: 1, duration: 1500 });
+  const feedback = FEEDBACK_IMAGES.slice(0, 5); // tối đa 5 ảnh để layout không rối
+  const hasFeedback = feedback.length > 0;
   return (
     <section id="reviews" className="section reviews">
       <div className="wrap reviews-grid">
@@ -65,18 +119,42 @@ function ReviewsSection() {
               <span>331 đánh giá</span>
             </div>
           </div>
+          {hasFeedback && (
+            <Reveal delay={160} as="p" className="reviews-hint">
+              <Leaf size={14} color="var(--sanite-leaf)" />
+              <span>Ảnh đánh giá thật từ khách hàng — di chuột / chạm để xem.</span>
+            </Reveal>
+          )}
         </div>
 
         <div className="reviews-right">
+          {hasFeedback ? (
+            <Reveal variant="soft"><FeedbackAccordion images={feedback} /></Reveal>
+          ) : (
+            <div className="reviews-cards">
+              {REVIEWS.map((r, i) => (
+                <Reveal key={r.l} delay={i * 110} variant="quote" className="review-card lift">
+                  <span className="rc-quote-mark" aria-hidden="true">”</span>
+                  <p className="rc-quote">{r.q}</p>
+                  <span className="rc-label">{r.l}</span>
+                </Reveal>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {hasFeedback && (
+        <div className="wrap reviews-quotes">
           {REVIEWS.map((r, i) => (
-            <Reveal key={r.l} delay={i * 110} variant="quote" className="review-card lift">
+            <Reveal key={r.l} delay={i * 90} variant="quote" className="review-chip lift">
               <span className="rc-quote-mark" aria-hidden="true">”</span>
               <p className="rc-quote">{r.q}</p>
               <span className="rc-label">{r.l}</span>
             </Reveal>
           ))}
         </div>
-      </div>
+      )}
     </section>
   );
 }
@@ -91,6 +169,8 @@ function VisitSection() {
   ];
   return (
     <section id="contact" className="section plaster visit">
+      {/* PROMPT 05 — Đức Phật line-art mờ ở bên phải, gợi an yên, không che CTA */}
+      <BuddhaOrnament className="visit-buddha" />
       <div className="wrap">
         <Reveal><p className="eyebrow" style={{ color: 'var(--sanite-gold)' }}>Ghé thăm</p></Reveal>
         <Reveal delay={100} as="h2" className="visit-h2">Ghé Sanité tại Phú Nhuận</Reveal>
