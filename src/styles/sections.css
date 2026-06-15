@@ -678,8 +678,8 @@
    ========================================================= */
 .story-lotus-photo {
   position: absolute; z-index: 0; pointer-events: none;
-  top: clamp(-140px, -9vw, -80px);
-  left: clamp(0px, 2vw, 48px);
+  /* PROMPT 08b — sát cạnh trái + sát đáy Story */
+  top: auto; bottom: 0; left: 0;
   width: clamp(360px, 36vw, 620px);
   height: clamp(620px, 78vh, 900px);
 }
@@ -766,7 +766,7 @@
 /* --- Tablet --- */
 @media (max-width: 860px) {
   /* PROMPT 07 — ornament vẫn THẤY RÕ trên mobile: tăng size/opacity + glow drop-shadow */
-  .story-lotus-photo { width: clamp(320px, 58vw, 480px); height: clamp(420px, 54vw, 560px); top: clamp(-110px, -13vw, -72px); left: clamp(-24px, -2vw, 0px); }
+  .story-lotus-photo { width: clamp(320px, 58vw, 480px); height: clamp(420px, 54vw, 560px); top: auto; bottom: 0; left: 0; }
   .story-lotus-photo.is-visible { opacity: 0.42; }
   /* Buddha lên góc phải TRÊN (tránh bị map-card đậm che khuất ở đáy) */
   .visit-buddha-photo { width: clamp(220px, 50vw, 300px); top: clamp(8px, 5vw, 78px); bottom: auto; right: -48px; }
@@ -794,7 +794,7 @@
 
 /* --- Mobile --- */
 @media (max-width: 560px) {
-  .story-lotus-photo { width: 92vw; height: 380px; top: -60px; left: -16px; }
+  .story-lotus-photo { width: 92vw; height: 380px; top: auto; bottom: 0; left: 0; }
   .story-lotus-photo.is-visible { opacity: 0.36; }
   .visit-buddha-photo { width: clamp(190px, 56vw, 260px); top: 6px; right: -52px; bottom: auto; }
   .visit-buddha-photo.is-visible { opacity: 0.22; }
@@ -804,5 +804,5 @@
 }
 
 @media (max-width: 360px) {
-  .story-lotus-photo { width: 96vw; height: 340px; top: -50px; }
+  .story-lotus-photo { width: 96vw; height: 340px; top: auto; bottom: 0; }
 }

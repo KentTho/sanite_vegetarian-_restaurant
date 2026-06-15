@@ -108,6 +108,10 @@ Trong ngày 2026-06-13, dự án **chính thức chuyển sang thư mục/giao d
 - **Static validation:** CSS braces cân bằng (index 151/151, sections 350/350); không console.log; không src lỗi.
 - **Không làm:** không cài shadcn/Tailwind/TS/lucide, không thêm dependency, không ảnh internet/placeholder, không deploy Vercel, không force push, không commit report/screenshots/backups.
 
+### Prompt 08b — Story lotus sát cạnh trái + sát đáy (2026-06-15)
+- Theo yêu cầu: đổi vị trí ảnh `hoasen.jpg` ở Story sang **sát cạnh trái + sát đáy** section (`top:auto; bottom:0; left:0` cho cả desktop/tablet/mobile), `border-radius:0 46px 0 0` (vuông góc trái & đáy). Giữ nguyên treatment (mask/opacity/filter/scrim) và mọi phần khác.
+- QA Playwright 6 breakpoint × 2 trang PASS: overflow=0, broken=0, console/req err=0, ảnh flush trái (left≈0) + sát đáy Story; chữ/card vẫn đọc rõ. Screenshot `report/screenshots/prompt08b/`.
+
 ## 11. Prompt 07 — Real lotus image, mobile ornament visibility & feedback full max (2026-06-15)
 - **Lotus SVG → ảnh thật:** bỏ render `LotusBranch` trong `StorySection` (component vẫn còn trong `hooks.jsx`, không dùng — không ảnh hưởng runtime); thay bằng ảnh thật `assets/hoasen.jpg` qua `.story-lotus-photo` (decorative: `alt=""`, `aria-hidden`, `pointer-events:none`). Hòa nền giống Buddha photo: `object-fit:contain` + `mask-image` radial + filter ấm + `drop-shadow` gold glow; float + glow breathe; opacity ~0.7; đặt ở vùng chuyển Hero→Story (`top` âm). Gỡ CSS `.lotus-branch/.lb-*` cũ trong index.css.
 - **Mobile ornament visibility:** tăng opacity + thêm `drop-shadow` glow cho lotus & buddha trên mobile; **Buddha photo chuyển lên góc phải TRÊN** Visit (trước đó bị map-card đậm che ở đáy nên không thấy). Lotus mobile width clamp(150–280px) opacity ~0.68. Không che text/CTA, không overflow.

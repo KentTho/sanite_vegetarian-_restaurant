@@ -557,7 +557,7 @@ img { max-width: 100%; display: block; }
   transform: translateY(16px) scale(.985);
   transition: opacity 1.3s ease, transform 1.3s cubic-bezier(.22,.61,.36,1);
   overflow: hidden;
-  border-radius: 0 46px 46px 0;
+  border-radius: 0 46px 0 0; /* PROMPT 08b — vuông góc trái & đáy để sát cạnh Story */
   box-shadow: 0 32px 90px rgba(63,51,45,0.12), 0 0 80px rgba(162,131,90,0.12);
   /* mờ dần sang phải để hòa vào nền kem */
   -webkit-mask-image: linear-gradient(to right, #000 0%, #000 54%, transparent 100%);
