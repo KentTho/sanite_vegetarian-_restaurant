@@ -123,7 +123,7 @@ function Navbar() {
         </div>
         <div className="overlay-cta">
           <a href={SANITE.tel} className="pill pill-primary" onClick={close}>Gọi {SANITE.phone}</a>
-          <a href={SANITE.maps} target="_blank" rel="noopener noreferrer" className="pill pill-outline-green" onClick={close}>Mở Google Maps</a>
+          <a href="#contact" className="pill pill-outline-green" onClick={close}>Xem địa điểm</a>
         </div>
       </div>
     </>
@@ -183,7 +183,7 @@ function CopyPhoneButton() {
 
 function HeroTypewriter() {
   const tw = useTypewriter(
-    'Thưởng thức món chay sáng tạo từ nấm, rau củ tươi và hương vị Việt được biến tấu nhẹ nhàng.',
+    'Ghé Sanité để thưởng thức món chay sáng tạo trong hai không gian ấm áp tại Quận 3 và Phú Nhuận.',
     { speed: 26, startDelay: 650 }
   );
   return (
@@ -263,7 +263,7 @@ function Hero() {
         {/* LEFT */}
         <div className="hero-content">
           <p className="hero-intro" aria-hidden="true">
-            Sanité Chay tại Phú Nhuận,<br />
+            Sanité Chay tại Quận 3 &amp; Phú Nhuận,<br />
             ấm nhẹ giữa nhịp phố.
           </p>
 
@@ -272,21 +272,21 @@ function Hero() {
               <span className="hero-accent">Sanité Chay</span>
               <span className="hero-dash"> — </span>
             </span>
-            bữa chay ấm lành giữa <span className="no-break">Phú Nhuận</span>
+            bữa chay ấm lành giữa <span className="no-break">Sài Gòn</span>
           </h1>
 
           <HeroTypewriter />
 
           <div className="hero-badges">
+            <span className="badge"><span className="badge-dot" />2 chi nhánh</span>
+            <span className="badge"><span className="badge-dot" />Quận 3 · Phú Nhuận</span>
             <span className="badge"><span className="badge-dot" />10:00 – 22:00</span>
-            <span className="badge"><span className="badge-dot" />Phú Nhuận, HCM</span>
-            <span className="badge"><span className="badge-dot" />4.7/5 từ 331 đánh giá</span>
           </div>
 
           <div className="hero-actions">
             <a href={SANITE.tel} className="pill pill-primary">Gọi đặt bàn</a>
-            <a href="#menu" className="pill pill-secondary">Xem món nổi bật</a>
-            <a href={SANITE.maps} target="_blank" rel="noopener noreferrer" className="pill pill-outline-green">Mở Google Maps</a>
+            <a href="#menu" className="pill pill-secondary">Xem thực đơn</a>
+            <a href="#contact" className="pill pill-outline-green">Xem địa điểm</a>
             <CopyPhoneButton />
           </div>
         </div>
@@ -301,8 +301,8 @@ function Hero() {
           </div>
 
           <div className="float-card float-card-b">
-            <span className="fc-stat">200k–300k</span>
-            <span className="fc-stat-label">/ người</span>
+            <span className="fc-stat">2 chi nhánh</span>
+            <span className="fc-stat-label">Quận 3 · Phú Nhuận</span>
           </div>
         </div>
       </div>

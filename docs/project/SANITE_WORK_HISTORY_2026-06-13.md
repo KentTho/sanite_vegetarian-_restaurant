@@ -96,6 +96,18 @@ Trong ngày 2026-06-13, dự án **chính thức chuyển sang thư mục/giao d
 - **Static validation:** không còn `BuddhaOrnament`/`.buddha-ornament`/`.bo-*` trong src; `adidaphat.jpg` + `banner_*.jpg` trỏ file thật; feedback dùng contain; CSS braces cân bằng (index 169/169, sections 326/326); không console.log.
 - **Không làm:** không cài shadcn/Tailwind/TS/lucide, không thêm dependency, không ảnh internet/placeholder, không deploy Vercel, không force push, không commit report/screenshots/backups.
 
+## 12. Prompt 08 — Story lotus backdrop & cập nhật 2 chi nhánh (2026-06-15)
+- **Story lotus backdrop:** chuyển `assets/hoasen.jpg` từ medallion nhỏ thành **khối ảnh lớn bên trái Story** (class `story-lotus-backdrop`), vượt nhẹ lên Hero: `object-fit:cover`, `border-radius 0 46px 46px 0`, `mask` mờ dần sang phải, `box-shadow` mềm, opacity ~0.5; nằm sau chữ + scrim `.story-left::before` bảo vệ readability → không che chữ. Mobile thành watermark (opacity 0.36–0.42), không overflow.
+- **2 chi nhánh:** thêm `SANITE_BRANCHES` (Quận 3 + Phú Nhuận) trong `hooks.jsx`, export `window`. Cập nhật toàn site không còn hiểu nhầm chỉ có Phú Nhuận (Hero, Visit, Footer, FinalCTA, blurb, tag).
+- **Hero bỏ giá:** xoá badge/float-card giá (200k–300k, /người); badges mới "2 chi nhánh · Quận 3 · Phú Nhuận · 10:00–22:00"; H1 "…giữa Sài Gòn"; typewriter nhắc 2 không gian Quận 3 & Phú Nhuận.
+- **CTA "Xem địa điểm":** bỏ mọi text "Google Maps"/"Mở Google Maps" trong UI (Hero, mobile nav, Visit, FinalCTA, Footer); link vẫn trỏ Google Maps đúng CID từng chi nhánh.
+- **Visit 2 branch cards:** thay layout cũ (info + map-card + giá) bằng `.branches-grid` 2 `.branch-card` (Quận 3 featured + Phú Nhuận): label, tên, địa chỉ, giờ, rating, phone, mô tả ngắn, CTA "Xem địa điểm" + "Gọi {chi nhánh}". Title "Chọn một góc Sanité gần bạn". Mobile stack 1 cột.
+- **Footer 2 chi nhánh:** cột "Chi nhánh" liệt kê cả hai (địa chỉ + phone + "Xem địa điểm"); blurb + tag nhắc Quận 3 & Phú Nhuận.
+- **Menu best-seller:** `featured:true` + badge "Gợi ý nên thử" cho Bánh mì Pate nấm (đổi tên gọn), Nấm bào ngư chiên muối tiêu (mới), Lẩu Tomyum kem béo (mới), Bánh Crème Brûlée (mới, category "Tráng miệng"). Không xóa món cũ.
+- **QA:** Playwright headless `index.html` + `sanite-chay.html` × 6 breakpoint đều PASS: overflow=0, broken=0, console/page err=0, failed req=0; lotus backdrop hiện, 2 branch card, footer 2 chi nhánh, KHÔNG còn text "Google Maps", Hero không còn giá, map href đúng CID Q3/PN, tel href đúng. Screenshot `report/screenshots/prompt08/` (ignored).
+- **Static validation:** CSS braces cân bằng (index 151/151, sections 350/350); không console.log; không src lỗi.
+- **Không làm:** không cài shadcn/Tailwind/TS/lucide, không thêm dependency, không ảnh internet/placeholder, không deploy Vercel, không force push, không commit report/screenshots/backups.
+
 ## 11. Prompt 07 — Real lotus image, mobile ornament visibility & feedback full max (2026-06-15)
 - **Lotus SVG → ảnh thật:** bỏ render `LotusBranch` trong `StorySection` (component vẫn còn trong `hooks.jsx`, không dùng — không ảnh hưởng runtime); thay bằng ảnh thật `assets/hoasen.jpg` qua `.story-lotus-photo` (decorative: `alt=""`, `aria-hidden`, `pointer-events:none`). Hòa nền giống Buddha photo: `object-fit:contain` + `mask-image` radial + filter ấm + `drop-shadow` gold glow; float + glow breathe; opacity ~0.7; đặt ở vùng chuyển Hero→Story (`top` âm). Gỡ CSS `.lotus-branch/.lb-*` cũ trong index.css.
 - **Mobile ornament visibility:** tăng opacity + thêm `drop-shadow` glow cho lotus & buddha trên mobile; **Buddha photo chuyển lên góc phải TRÊN** Visit (trước đó bị map-card đậm che ở đáy nên không thấy). Lotus mobile width clamp(150–280px) opacity ~0.68. Không che text/CTA, không overflow.

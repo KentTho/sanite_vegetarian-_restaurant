@@ -234,16 +234,50 @@ function LotusBranch({ className = '' }) {
 }
 
 /* ---- Constants ---- */
+/* PROMPT 08 — Sanité có 2 chi nhánh (Quận 3 + Phú Nhuận).
+   Link vẫn trỏ Google Maps nhưng text UI dùng "Xem địa điểm" (không ghi "Google Maps"). */
+const SANITE_BRANCHES = [
+  {
+    id: 'quan-3',
+    name: 'Sanité Chay Quận 3',
+    shortName: 'Quận 3',
+    label: 'Trụ sở chính',
+    address: '2B Hồ Xuân Hương, Xuân Hòa, Quận 3, Hồ Chí Minh',
+    phone: '+84 962 106 679',
+    phoneHref: 'tel:+84962106679',
+    hours: '10:00 – 22:00',
+    rating: '4.8/5',
+    reviewText: 'hơn 100 đánh giá',
+    mapUrl: 'https://maps.google.com/?cid=8179673700776799321',
+    description: 'Không gian ấm cúng, ánh sáng đẹp, hợp nhóm nhỏ hoặc buổi hẹn nhẹ nhàng.'
+  },
+  {
+    id: 'phu-nhuan',
+    name: 'Sanité Chay Phú Nhuận',
+    shortName: 'Phú Nhuận',
+    label: 'Không gian rộng hơn',
+    address: '46 Trương Quốc Dung, Phường 10, Phú Nhuận, Hồ Chí Minh',
+    phone: '+84 978 323 232',
+    phoneHref: 'tel:+84978323232',
+    hours: '10:00 – 22:00',
+    rating: '4.7/5',
+    reviewText: '331 đánh giá',
+    mapUrl: 'https://maps.google.com/?cid=9992186594375056901',
+    description: 'Trang nhã và thoáng hơn, hợp gia đình, họp mặt bạn bè hay tiếp khách.'
+  }
+];
+
 const SANITE = {
   phone: '+84 978 323 232',
   phoneRaw: '+84978323232',
   tel: 'tel:+84978323232',
   maps: 'https://maps.google.com/?cid=9992186594375056901',
   address: '46 Trương Quốc Dung, Phú Nhuận, Hồ Chí Minh',
+  branches: SANITE_BRANCHES,
 };
 
 Object.assign(window, {
   useState, useEffect, useRef, useCallback,
   useTypewriter, useReveal, Reveal, useCountUp, useMouseParallax, useLockBodyScroll,
-  prefersReduced, isTouch, Leaf, LotusMark, LotusBranch, SANITE,
+  prefersReduced, isTouch, Leaf, LotusMark, LotusBranch, SANITE, SANITE_BRANCHES,
 });

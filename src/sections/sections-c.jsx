@@ -160,63 +160,45 @@ function ReviewsSection() {
   );
 }
 
-/* ---------- SECTION 7 — VISIT ---------- */
+/* ---------- SECTION 7 — VISIT (2 chi nhánh) ---------- */
 function VisitSection() {
   const buddhaRef = useReveal({ once: true, threshold: 0.12 });
-  const INFO = [
-    { t: 'Địa chỉ', v: '46 Trương Quốc Dung,\nPhú Nhuận, Hồ Chí Minh', cta: { label: 'Mở Google Maps', href: SANITE.maps, ext: true } },
-    { t: 'Giờ mở cửa', v: '10:00 – 22:00', sub: 'Tất cả các ngày trong tuần' },
-    { t: 'Liên hệ', v: SANITE.phone, cta: { label: 'Gọi ngay', href: SANITE.tel } },
-    { t: 'Mức giá tham khảo', v: '200.000đ – 300.000đ', sub: '/ người' },
-  ];
   return (
     <section id="contact" className="section plaster visit">
-      {/* PROMPT 06 — ảnh thật Đức Phật (assets/adidaphat.jpg) làm ambience bên phải Visit.
-          Decorative: alt rỗng + aria-hidden + pointer-events none; mask/filter để tan vào nền. */}
+      {/* PROMPT 06 — ảnh thật Đức Phật (assets/adidaphat.jpg) làm ambience bên phải Visit. */}
       <div ref={buddhaRef} className="visit-buddha-photo" aria-hidden="true">
         <img src="assets/adidaphat.jpg" alt="" loading="lazy" decoding="async" />
       </div>
       <div className="wrap">
         <Reveal><p className="eyebrow" style={{ color: 'var(--sanite-gold)' }}>Ghé thăm</p></Reveal>
-        <Reveal delay={100} as="h2" className="visit-h2">Ghé Sanité tại Phú Nhuận</Reveal>
+        <Reveal delay={100} as="h2" className="visit-h2">Chọn một góc Sanité gần bạn</Reveal>
+        <Reveal delay={160} as="p" className="visit-lead">
+          Hai chi nhánh cùng mở 10:00 – 22:00, hợp cho bữa chay nhẹ, gặp gỡ bạn bè hay bữa ăn gia đình.
+        </Reveal>
 
-        <div className="visit-grid">
-          <div className="visit-info">
-            {INFO.map((c, i) => (
-              <Reveal key={c.t} delay={i * 110} variant="route" className="info-card lift route-step">
-                <span className="route-dot" aria-hidden="true" />
-                <span className="info-t">{c.t}</span>
-                <p className="info-v">{c.v}</p>
-                {c.sub && <span className="info-sub">{c.sub}</span>}
-                {c.cta && (
-                  <a
-                    href={c.cta.href}
-                    className="info-link"
-                    {...(c.cta.ext ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  >
-                    {c.cta.label}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path d="M7 17 17 7M17 7H9M17 7v8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </a>
-                )}
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={120} className="map-card velvet lift">
-            <svg className="map-leaves" viewBox="0 0 240 240" fill="none" aria-hidden="true">
-              <path d="M30 210 C30 150 30 120 30 70" stroke="var(--sanite-gold)" strokeWidth="1" opacity="0.4" />
-              <path d="M30 120 C60 105 75 90 80 60" stroke="var(--sanite-gold)" strokeWidth="0.9" opacity="0.35" />
-              <circle cx="80" cy="58" r="3" fill="var(--sanite-gold)" opacity="0.5" />
-            </svg>
-            <div className="map-card-inner">
-              <span className="eyebrow" style={{ color: 'var(--gold-bright)' }}>Chỉ đường</span>
-              <h3 className="map-title">Đi đến Sanité</h3>
-              <p className="map-sub">Mở Google Maps để tới 46 Trương Quốc Dung, Phú Nhuận.</p>
-              <a href={SANITE.maps} target="_blank" rel="noopener noreferrer" className="pill pill-gold">Xem đường đi</a>
-            </div>
-          </Reveal>
+        <div className="branches-grid">
+          {SANITE_BRANCHES.map((b, i) => (
+            <Reveal
+              key={b.id}
+              delay={i * 120}
+              variant="route"
+              className={`branch-card lift ${i === 0 ? 'branch-card-featured' : ''}`}
+            >
+              <span className="branch-label">{b.label}</span>
+              <h3 className="branch-name">{b.name}</h3>
+              <p className="branch-address">{b.address}</p>
+              <div className="branch-meta">
+                <span className="branch-meta-item"><span className="branch-dot" aria-hidden="true" />{b.hours}</span>
+                <span className="branch-meta-item"><span className="branch-star" aria-hidden="true">★</span>{b.rating} · {b.reviewText}</span>
+                <a className="branch-meta-item branch-phone" href={b.phoneHref}>{b.phone}</a>
+              </div>
+              <p className="branch-desc">{b.description}</p>
+              <div className="branch-actions">
+                <a href={b.mapUrl} target="_blank" rel="noopener noreferrer" className="pill pill-primary">Xem địa điểm</a>
+                <a href={b.phoneHref} className="pill pill-secondary">Gọi {b.shortName}</a>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -253,7 +235,7 @@ function FinalCTA() {
         </Reveal>
         <Reveal delay={280} className="final-actions">
           <a href={SANITE.tel} className="pill pill-gold">Gọi đặt bàn</a>
-          <a href={SANITE.maps} target="_blank" rel="noopener noreferrer" className="pill pill-cream-outline">Mở Google Maps</a>
+          <a href="#contact" className="pill pill-cream-outline">Xem địa điểm</a>
           <a href="#menu" className="pill pill-cream-outline">Xem thực đơn</a>
         </Reveal>
         <Reveal delay={340} as="p" className="final-hours">Mở cửa mỗi ngày từ 10:00 đến 22:00.</Reveal>
@@ -275,8 +257,8 @@ function Footer() {
             <img src="assets/brand/sanite-logo.png" alt="Sanité Chay" />
           </div>
           <p className="footer-blurb">
-            Sanité Chay — không gian chay ấm áp tại Phú Nhuận, phục vụ món chay sáng tạo trong
-            nhịp ăn nhẹ nhàng.
+            Sanité Chay — không gian chay ấm áp tại Quận 3 và Phú Nhuận, phục vụ món chay
+            sáng tạo trong nhịp ăn nhẹ nhàng.
           </p>
         </Reveal>
 
@@ -286,25 +268,31 @@ function Footer() {
           <a href="#menu">Thực đơn</a>
           <a href="#space">Không gian</a>
           <a href="#reviews">Đánh giá</a>
-          <a href="#contact">Liên hệ</a>
+          <a href="#contact">Chi nhánh</a>
         </Reveal>
 
-        <Reveal variant="soft" delay={180} className="footer-col">
-          <h4 className="footer-h">Liên hệ</h4>
-          <p>46 Trương Quốc Dung,<br />Phú Nhuận, Hồ Chí Minh</p>
-          <a href={SANITE.tel}>{SANITE.phone}</a>
-          <a href={SANITE.maps} target="_blank" rel="noopener noreferrer">Google Maps</a>
+        <Reveal variant="soft" delay={180} className="footer-col footer-branches">
+          <h4 className="footer-h">Chi nhánh</h4>
+          {SANITE_BRANCHES.map((b) => (
+            <div key={b.id} className="footer-branch">
+              <span className="footer-branch-name">{b.shortName}</span>
+              <p>{b.address}</p>
+              <a href={b.phoneHref}>{b.phone}</a>
+              <a href={b.mapUrl} target="_blank" rel="noopener noreferrer">Xem địa điểm</a>
+            </div>
+          ))}
         </Reveal>
 
         <Reveal variant="soft" delay={270} className="footer-col">
           <h4 className="footer-h">Giờ mở cửa</h4>
           <p>10:00 – 22:00</p>
-          <p>Mỗi ngày</p>
+          <p>Tất cả các ngày</p>
+          <p>Quận 3 · Phú Nhuận</p>
         </Reveal>
       </div>
       <Reveal variant="soft" delay={120} className="footer-bottom">
         <span>© 2026 Sanité Chay. All rights reserved.</span>
-        <span className="footer-tag"><Leaf size={13} color="var(--sanite-leaf)" /> Vegetarian · Phú Nhuận</span>
+        <span className="footer-tag"><Leaf size={13} color="var(--sanite-leaf)" /> Vegetarian · Quận 3 &amp; Phú Nhuận</span>
       </Reveal>
     </footer>
   );

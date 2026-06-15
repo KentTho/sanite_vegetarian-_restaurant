@@ -13,9 +13,9 @@ function StorySection() {
   const lotusRef = useReveal({ once: true, threshold: 0.1 });
   return (
     <section id="story" className="section plaster story">
-      {/* PROMPT 07 — ảnh thật hoa sen (assets/hoasen.jpg) ở vùng chuyển Hero → Story.
-          Decorative: alt rỗng + aria-hidden + pointer-events none; mask/filter/glow hòa nền. */}
-      <div ref={lotusRef} className="story-lotus-photo story-lotus-photo-featured" aria-hidden="true">
+      {/* PROMPT 08 — ảnh thật hoa sen làm BACKDROP lớn bên trái Story, vượt nhẹ lên Hero.
+          Decorative: alt rỗng + aria-hidden + pointer-events none; nằm sau chữ, không che chữ. */}
+      <div ref={lotusRef} className="story-lotus-photo story-lotus-backdrop" aria-hidden="true">
         <img src="assets/hoasen.jpg" alt="" loading="lazy" decoding="async" />
       </div>
       <div className="wrap story-grid">
@@ -122,9 +122,9 @@ function ExperienceSection() {
 const MENU_ITEMS = [
   // --- Khai vị ---
   {
-    id: 'banh-mi-pate-nam', category: 'Khai vị', name: 'Bánh mì pate chay từ nấm',
-    description: 'Pate nấm béo bùi, bánh mì giòn nhẹ.',
-    image: 'assets/menu/banh-mi-pate-nam.jpg', imageAlt: 'Bánh mì pate chay từ nấm tại Sanité',
+    id: 'banh-mi-pate-nam', category: 'Khai vị', name: 'Bánh mì Pate nấm', featured: true,
+    description: 'Pate nấm béo thơm, dùng cùng bánh mì giòn.',
+    image: 'assets/menu/banh-mi-pate-nam.jpg', imageAlt: 'Bánh mì Pate nấm tại Sanité',
     detail: 'Pate làm từ nấm, vị béo bùi tự nhiên, gợi hương quen thuộc nhưng nhẹ hơn.',
     note: 'Món dễ làm khách không ăn chay trường thấy bất ngờ.'
   },
@@ -180,6 +180,12 @@ const MENU_ITEMS = [
     image: '', imageAlt: 'Thịt bò chay từ nấm tại Sanité',
     detail: 'Vị đậm và kết cấu gần gũi, thường hợp khi dẫn người quen ăn mặn cùng đi.'
   },
+  {
+    id: 'nam-bao-ngu-chien-muoi-tieu', category: 'Món nấm', name: 'Nấm bào ngư chiên muối tiêu', featured: true,
+    description: 'Nấm bào ngư giòn nhẹ, áo muối tiêu kiểu Hong Kong.',
+    image: '', imageAlt: 'Nấm bào ngư chiên muối tiêu kiểu Hong Kong tại Sanité',
+    detail: 'Nấm bào ngư chiên giòn, áo lớp muối tiêu thơm kiểu Hong Kong, ăn nóng rất cuốn.'
+  },
 
   // --- Lẩu / Xúp ---
   {
@@ -193,6 +199,12 @@ const MENU_ITEMS = [
     description: 'Nước lẩu sa tế ấm, hợp để chia sẻ.',
     image: '', imageAlt: 'Lẩu sa tế chay tại Sanité',
     detail: 'Nước lẩu cay ấm dùng cùng nấm và rau củ tươi, hợp cho nhóm bạn hoặc gia đình.'
+  },
+  {
+    id: 'lau-tomyum-kem-beo', category: 'Lẩu / Xúp', name: 'Lẩu Tomyum kem béo', featured: true,
+    description: 'Chua cay, hậu vị béo mềm, hợp nhóm 2 người trở lên.',
+    image: '', imageAlt: 'Lẩu Tomyum kem béo chay tại Sanité',
+    detail: 'Tomyum chua cay đặc trưng, thêm lớp kem béo mềm; dùng cùng nấm và rau củ, hợp nhóm bạn.'
   },
   {
     id: 'xup-chay', category: 'Lẩu / Xúp', name: 'Xúp chay',
@@ -214,6 +226,14 @@ const MENU_ITEMS = [
     image: '', imageAlt: 'Nước ép trái cây tươi tại Sanité',
     detail: 'Nước ép trái cây tươi theo mùa, dễ uống và hợp tinh thần bữa ăn lành.'
   },
+
+  // --- Tráng miệng ---
+  {
+    id: 'banh-creme-brulee', category: 'Tráng miệng', name: 'Bánh Crème Brûlée', featured: true,
+    description: 'Crème Brûlée ngọt dịu, lớp đường khò giòn.',
+    image: '', imageAlt: 'Bánh Crème Brûlée tại Sanité',
+    detail: 'Lớp kem trứng mềm mịn, mặt đường khò giòn rụm, kết bữa nhẹ nhàng và vừa ngọt.'
+  },
 ];
 const MENU_CATS = MENU_ITEMS.reduce((acc, m) => (acc.includes(m.category) ? acc : [...acc, m.category]), []);
 
@@ -228,6 +248,7 @@ function DishCard({ dish, index, onOpen }) {
       aria-label={`Xem chi tiết món ${dish.name}`}
     >
       <span className="mc-media" aria-hidden="true">
+        {dish.featured && <span className="mc-badge">Gợi ý nên thử</span>}
         {dish.image
           ? <img src={dish.image} alt="" loading="lazy" />
           : <span className="mc-media-frame"><Leaf size={20} color="var(--sanite-gold)" /></span>}
