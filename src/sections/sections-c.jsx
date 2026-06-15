@@ -32,7 +32,7 @@ function SpaceGallery() {
             Vòm tường mềm, ánh đèn vàng, bàn gỗ và ghế mây tạo cảm giác ấm, nhẹ và riêng tư.
           </Reveal>
           <Reveal delay={120} as="blockquote" className="space-quote">
-            “Không gian hiện đại mà vẫn rất dễ chịu.”
+            “Không gian ấm áp, riêng tư giành cho bạn và người thương”
           </Reveal>
         </div>
       </div>
@@ -82,15 +82,16 @@ function FeedbackAccordion({ images }) {
           onFocus={() => setActive(i)}
           onClick={() => setActive(i)}
         >
-          <img
-            src={img.src}
-            alt={`Ảnh đánh giá khách hàng Sanité — ${img.title}`}
-            loading="lazy"
-            decoding="async"
-            onError={() => setErrored((p) => ({ ...p, [img.id]: true }))}
-          />
-          <span className="fb-overlay" aria-hidden="true" />
-          <span className="fb-caption">
+          <span className="fb-image-shell">
+            <img
+              src={img.src}
+              alt={`Ảnh đánh giá khách hàng Sanité — ${img.title}`}
+              loading="lazy"
+              decoding="async"
+              onError={() => setErrored((p) => ({ ...p, [img.id]: true }))}
+            />
+          </span>
+          <span className="fb-caption-bar">
             <span className="fb-caption-dot" aria-hidden="true" />
             <span className="fb-caption-text">{img.title}</span>
           </span>
@@ -110,7 +111,7 @@ function ReviewsSection() {
         <div className="reviews-left">
           <Reveal><p className="eyebrow" style={{ color: 'var(--sanite-gold)' }}>Đánh giá</p></Reveal>
           <Reveal delay={100} as="h2" className="reviews-h2">
-            Được yêu bởi vị chay và không gian ấm.
+            Những đánh giá và góp ý quý giá của thực khách sau khi trải nghiệm.
           </Reveal>
           <div className="rating-block" ref={ratingRef}>
             <div className="rating-num">{rating}<span className="rating-of">/5</span></div>

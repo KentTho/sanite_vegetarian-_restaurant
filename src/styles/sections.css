@@ -146,13 +146,13 @@
   width: 100%; height: 100%; object-fit: cover; object-position: center;
   opacity: 0;
   transform: scale(1.025) translate3d(0, 0, 0);
-  transition: opacity 1.15s ease, transform 5.8s cubic-bezier(.22,.61,.36,1);
+  transition: opacity 0.95s ease, transform 4s cubic-bezier(.22,.61,.36,1);
   will-change: opacity, transform;
   filter: brightness(1.05) saturate(0.99) contrast(0.97);
 }
 .hero-slide.is-active {
   opacity: 1;
-  transform: scale(1.055) translate3d(1.2%, -0.8%, 0);
+  transform: scale(1.05) translate3d(1.1%, -0.7%, 0);
 }
 /* overlay sáng: veil kem/gold + emerald nhẹ ở góc dưới trái (không làm ảnh tối) */
 .hero-image-overlay {
@@ -628,22 +628,21 @@
 }
 
 /* =========================================================
-   PROMPT 05 — ORNAMENT PLACEMENT + FEEDBACK ACCORDION (layout)
-   - .story-lotus-branch: góc trên trái Story (sau nội dung)
-   - .visit-buddha: bên phải Visit (z-index thấp hơn .wrap)
+   ORNAMENT PLACEMENT + FEEDBACK ACCORDION (layout) — cập nhật Prompt 07
+   - .story-lotus-photo: ảnh thật hoa sen ở vùng chuyển Hero → Story
+   - .visit-buddha-photo: ảnh thật Đức Phật bên phải Visit (z-index thấp hơn .wrap)
    - .fb-accordion: ảnh feedback thật — desktop accordion, mobile scroll cards
    ========================================================= */
 /* =========================================================
-   PROMPT 06 — FEATURED LOTUS TRANSITION HERO → STORY
-   Hoa sen lớn hơn, vươn lên vùng chuyển giữa Hero và Story.
-   (.story bỏ overflow:hidden để cành vươn lên; body overflow-x:hidden chống tràn ngang)
+   PROMPT 07 — REAL LOTUS PHOTO PLACEMENT (Hero → Story transition)
+   (.story overflow:visible để hoa vươn lên; body overflow-x:hidden chống tràn ngang)
    ========================================================= */
-.story-lotus-branch {
-  position: absolute; z-index: 0;
-  top: clamp(-110px, -7vw, -70px);
-  left: clamp(32px, 12vw, 220px);
-  width: clamp(220px, 18vw, 340px);
-  aspect-ratio: 220 / 280;
+.story-lotus-photo {
+  position: absolute; z-index: 0; pointer-events: none;
+  top: clamp(-150px, -9vw, -94px);
+  left: clamp(24px, 13vw, 250px);
+  width: clamp(260px, 22vw, 420px);
+  aspect-ratio: 1 / 1;
 }
 
 /* --- Buddha photo placement (Visit) — ảnh thật adidaphat.jpg --- */
@@ -662,52 +661,50 @@
 .reviews-hint svg { flex-shrink: 0; }
 
 /* =========================================================
-   PROMPT 06 — FULL FEEDBACK IMAGE VIEW
+   PROMPT 07 — FULL MAX FEEDBACK REVIEW IMAGE
    Mục tiêu:
-   - Xem TRỌN ảnh đánh giá khách hàng (object-fit: contain, không crop chữ)
-   - Khung kem/emerald để ảnh dọc/ngang đều gọn, đồng đều
-   - Vẫn giữ accordion mượt; caption là chip nhỏ không che review
+   - Ảnh review hiện LỚN nhất có thể, xem trọn (object-fit: contain, không crop/méo)
+   - Active item thật sự lớn; caption nằm DƯỚI ảnh (không che review)
+   - Mobile: card gần full-width + cao, dễ xem trọn
    ========================================================= */
 .fb-accordion {
-  display: flex; gap: 14px; width: 100%; height: 520px; min-width: 0;
+  display: flex; gap: 12px; width: 100%; min-width: 0;
+  height: clamp(560px, 52vw, 680px);
 }
 .fb-item {
-  position: relative; height: 100%; min-width: 66px;
-  flex: 1 1 0%; flex-grow: 0.5;
-  border-radius: 24px; overflow: hidden; padding: 0; cursor: pointer;
+  position: relative; height: 100%; min-width: 58px;
+  flex: 1 1 0%; flex-grow: 0.4;
+  display: flex; flex-direction: column;
+  border-radius: 22px; overflow: hidden; padding: 0; cursor: pointer;
   border: 1px solid var(--border-soft);
-  background:
-    radial-gradient(120% 90% at 50% 0%, rgba(20,66,43,0.10), transparent 60%),
-    linear-gradient(160deg, var(--sanite-warm-cream), var(--sanite-cream));
+  background: linear-gradient(160deg, var(--sanite-warm-cream), var(--sanite-cream));
   transition: flex-grow .7s cubic-bezier(.22,.61,.36,1), box-shadow .5s ease, border-color .5s ease;
 }
-.fb-item.is-active { flex-grow: 5.2; border-color: var(--sanite-gold); box-shadow: var(--shadow-soft); }
+.fb-item.is-active { flex-grow: 6.5; border-color: var(--sanite-gold); box-shadow: var(--shadow-soft); }
 .fb-accordion.is-single .fb-item { flex-grow: 1; }
-/* contain + padding: ảnh review hiện trọn, không méo, không chạm viền */
-.fb-item img {
-  position: absolute; inset: 12px; width: calc(100% - 24px); height: calc(100% - 24px);
-  object-fit: contain; object-position: center; display: block; border-radius: 12px;
+/* shell ảnh chiếm phần lớn chiều cao; caption-bar tách riêng phía dưới */
+.fb-image-shell {
+  position: relative; flex: 1 1 auto; min-height: 0; width: 100%;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(20,66,43,0.07), transparent 60%);
 }
-/* vignette nhẹ ở đáy để caption nổi, KHÔNG tint toàn ảnh */
-.fb-overlay {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none; border-radius: 24px;
-  box-shadow: inset 0 -44px 60px -42px rgba(8,33,21,0.32);
+.fb-image-shell img {
+  position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px);
+  object-fit: contain; object-position: center; display: block; border-radius: 10px;
 }
-.fb-caption {
-  position: absolute; left: 12px; bottom: 12px; z-index: 2;
-  display: inline-flex; align-items: center; gap: 8px; max-width: calc(100% - 24px);
-  padding: 8px 14px; border-radius: 999px;
-  background: rgba(8,33,21,0.66); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-  color: var(--sanite-cream);
+.fb-caption-bar {
+  flex: 0 0 auto; display: flex; align-items: center; gap: 9px;
+  padding: 12px 16px; min-height: 22px; overflow: hidden;
+  color: var(--sanite-dark-brown); border-top: 1px solid var(--border-soft);
+  background: rgba(255,255,255,0.42);
 }
-.fb-caption-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold-bright); flex-shrink: 0; }
+.fb-caption-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--sanite-gold); flex-shrink: 0; }
 .fb-caption-text {
-  font-family: var(--font-heading); font-size: 15px; line-height: 1.2; white-space: nowrap;
+  font-family: var(--font-heading); font-size: 16px; line-height: 1.2; white-space: nowrap;
   max-width: 0; overflow: hidden; opacity: 0;
   transition: max-width .55s cubic-bezier(.22,.61,.36,1), opacity .4s ease .06s;
 }
 .fb-item.is-active .fb-caption-text,
-.fb-accordion.is-single .fb-caption-text { max-width: 240px; opacity: 1; }
+.fb-accordion.is-single .fb-caption-text { max-width: 280px; opacity: 1; }
 .fb-item:focus-visible { outline: 2px solid var(--sanite-green-700); outline-offset: 2px; }
 
 /* --- Review quote chips (dưới grid khi có ảnh feedback) --- */
@@ -722,14 +719,17 @@
 
 /* --- Tablet --- */
 @media (max-width: 860px) {
-  .story-lotus-branch { width: clamp(150px, 30vw, 230px); top: clamp(-80px, -10vw, -54px); left: clamp(14px, 5vw, 56px); }
-  .story-lotus-branch.is-visible { opacity: 0.62; }
-  .visit-buddha-photo { width: 240px; top: auto; bottom: 0; right: -78px; }
-  .visit-buddha-photo.is-visible { opacity: 0.2; }
+  /* PROMPT 07 — ornament vẫn THẤY RÕ trên mobile: tăng size/opacity + glow drop-shadow */
+  .story-lotus-photo { width: clamp(170px, 40vw, 280px); top: clamp(-110px, -16vw, -72px); left: clamp(10px, 4vw, 48px); }
+  .story-lotus-photo.is-visible { opacity: 0.72; }
+  /* Buddha lên góc phải TRÊN (tránh bị map-card đậm che khuất ở đáy) */
+  .visit-buddha-photo { width: clamp(220px, 50vw, 300px); top: clamp(8px, 5vw, 78px); bottom: auto; right: -48px; }
+  .visit-buddha-photo.is-visible { opacity: 0.24; }
+  .story-lotus-photo, .visit-buddha-photo { filter: drop-shadow(0 8px 22px rgba(162,131,90,0.35)); }
 
-  /* accordion -> scroll cards */
+  /* feedback -> full-width tall cards, scroll-snap, xem trọn ảnh */
   .fb-accordion {
-    height: auto; gap: 14px; overflow-x: auto; padding: 4px 2px 10px;
+    height: auto; gap: 14px; overflow-x: auto; padding: 4px 2px 12px;
     scroll-snap-type: x mandatory; overscroll-behavior-inline: contain;
     -webkit-overflow-scrolling: touch;
   }
@@ -737,26 +737,26 @@
   .fb-accordion::-webkit-scrollbar-thumb { background: var(--border-green); border-radius: 999px; }
   .fb-item,
   .fb-item.is-active {
-    flex: 0 0 68%; flex-grow: 0; max-width: 440px; height: auto;
-    aspect-ratio: 3 / 4; scroll-snap-align: center;
+    flex: 0 0 74vw; flex-grow: 0; max-width: 460px; height: min(70vh, 640px);
+    scroll-snap-align: center;
   }
-  .fb-item img { inset: 10px; width: calc(100% - 20px); height: calc(100% - 20px); }
-  .fb-caption-text { max-width: 240px; opacity: 1; }
+  .fb-image-shell img { inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); }
+  .fb-caption-text { max-width: 260px; opacity: 1; }
 
   .reviews-quotes { grid-template-columns: 1fr 1fr; }
 }
 
 /* --- Mobile --- */
 @media (max-width: 560px) {
-  .story-lotus-branch { width: clamp(120px, 42vw, 190px); top: clamp(-66px, -16vw, -48px); left: 8px; }
-  .story-lotus-branch.is-visible { opacity: 0.5; }
-  .visit-buddha-photo { width: 200px; right: -84px; bottom: 0; }
-  .visit-buddha-photo.is-visible { opacity: 0.16; }
+  .story-lotus-photo { width: clamp(150px, 46vw, 240px); top: clamp(-86px, -22vw, -62px); left: 4px; }
+  .story-lotus-photo.is-visible { opacity: 0.68; }
+  .visit-buddha-photo { width: clamp(190px, 56vw, 260px); top: 6px; right: -52px; bottom: auto; }
+  .visit-buddha-photo.is-visible { opacity: 0.22; }
   .fb-item,
-  .fb-item.is-active { flex-basis: 84vw; }
+  .fb-item.is-active { flex-basis: 90vw; height: min(72vh, 660px); }
   .reviews-quotes { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 360px) {
-  .story-lotus-branch { width: 128px; top: -44px; }
+  .story-lotus-photo { width: 150px; top: -58px; }
 }

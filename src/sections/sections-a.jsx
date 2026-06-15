@@ -151,9 +151,16 @@ const HERO_SLIDES = [
     src: 'assets/banner/banner_2.jpg',
     alt: 'Góc bàn ăn tinh tế tại Sanité',
     label: 'Góc bàn ăn'
+  },
+  {
+    id: 'banner-3',
+    src: 'assets/banner/banner_3.jpg',
+    alt: 'Bảng hiệu Sanité Chay cùng bình hoa cúc trắng',
+    label: 'Thương hiệu Sanité'
   }
 ];
-const HERO_SLIDE_INTERVAL_MS = 5400;
+/* PROMPT 07 — chuyển ảnh nhanh hơn (5.4s -> 3.6s/slide); crossfade ~0.95s ở .hero-slide. */
+const HERO_SLIDE_INTERVAL_MS = 3600;
 
 function CopyPhoneButton() {
   const [copied, setCopied] = useState(false);

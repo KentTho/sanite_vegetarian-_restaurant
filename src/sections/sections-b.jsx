@@ -10,10 +10,14 @@ const STORY_CARDS = [
 ];
 
 function StorySection() {
+  const lotusRef = useReveal({ once: true, threshold: 0.1 });
   return (
     <section id="story" className="section plaster story">
-      {/* PROMPT 05 — cành hoa sen nở góc trên trái, gió đung đưa nhẹ (decorative) */}
-      <LotusBranch className="story-lotus-branch" />
+      {/* PROMPT 07 — ảnh thật hoa sen (assets/hoasen.jpg) ở vùng chuyển Hero → Story.
+          Decorative: alt rỗng + aria-hidden + pointer-events none; mask/filter/glow hòa nền. */}
+      <div ref={lotusRef} className="story-lotus-photo story-lotus-photo-featured" aria-hidden="true">
+        <img src="assets/hoasen.jpg" alt="" loading="lazy" decoding="async" />
+      </div>
       <div className="wrap story-grid">
         <div className="story-left">
           <Reveal><p className="eyebrow" style={{ color: 'var(--sanite-gold)' }}>Câu chuyện Sanité</p></Reveal>
@@ -314,7 +318,7 @@ function MenuSection() {
       <div className="wrap">
         <div className="menu-head">
           <Reveal><p className="eyebrow section-kicker" style={{ color: 'var(--sanite-gold)', justifyContent: 'center' }}>Thực đơn</p></Reveal>
-          <Reveal delay={100} as="h2" className="menu-h2 section-title">Món chay nổi bật</Reveal>
+          <Reveal delay={100} as="h2" className="menu-h2 section-title">Món chay signature</Reveal>
           <Reveal delay={180} as="p" className="menu-sub section-lead">
             Những món được yêu thích từ nấm, rau củ và hương vị Việt. Chạm vào món để xem chi tiết.
           </Reveal>

@@ -546,51 +546,31 @@ img { max-width: 100%; display: block; }
 .badge-dot { width: 7px; height: 7px; }
 
 /* =========================================================
-   PROMPT 05 — STORY LOTUS BRANCH ORNAMENT
+   PROMPT 07 — REAL LOTUS PHOTO TRANSITION (Hero → Story)
    Mục tiêu:
-   - Cành sen nở ở Story
-   - Gió đung đưa nhẹ
-   - Không che nội dung, không gây overflow
+   - Thay SVG cành sen bằng ảnh thật assets/hoasen.jpg
+   - Điểm chuyển Hero → Story cuốn hút; desktop nổi bật, mobile vẫn thấy rõ
    ========================================================= */
-.lotus-branch {
+.story-lotus-photo {
   pointer-events: none;
   opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity 1.1s ease, transform 1.1s cubic-bezier(.22,.61,.36,1);
-  filter: drop-shadow(0 6px 18px var(--sanite-gold-glow));
+  transform: translateY(14px) scale(.96);
+  transition: opacity 1.3s ease, transform 1.3s cubic-bezier(.22,.61,.36,1);
 }
-.lotus-branch.is-visible { opacity: 0.55; transform: none; }
-.lotus-branch svg { width: 100%; height: 100%; display: block; overflow: visible; }
-.lotus-branch.is-visible.lotus-branch-featured { opacity: 0.78; } /* PROMPT 06 — bản lớn giữa Hero/Story rõ hơn */
-/* glow kem/gold rất nhẹ phía sau hoa (PROMPT 06) */
-.lotus-branch::before {
-  content: ""; position: absolute; inset: -12% -10% 0 -10%; z-index: -1;
-  background: radial-gradient(closest-side, rgba(216,184,136,0.22), rgba(245,241,230,0) 72%);
-  pointer-events: none;
+.story-lotus-photo.is-visible { opacity: 0.7; transform: none; }
+.story-lotus-photo img {
+  width: 100%; height: 100%; object-fit: contain; object-position: center;
+  /* tan rìa vào nền */
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, #000 54%, transparent 82%);
+          mask-image: radial-gradient(circle at 50% 50%, #000 0%, #000 54%, transparent 82%);
+  /* float nhẹ + glow gold breathe (không đụng opacity fade-in của container) */
+  animation: lotusFloatGlow 9s ease-in-out infinite;
 }
-/* gốc cành làm tâm xoay → đung đưa như gió nhẹ (PROMPT 06: nhẹ hơn vì cành lớn) */
-.lotus-branch-sway {
-  transform-box: fill-box;
-  transform-origin: 12% 100%;
-  animation: lotusBranchSway 8s ease-in-out infinite;
-}
-@keyframes lotusBranchSway {
-  0%, 100% { transform: rotate(-1.1deg) translateY(0); }
-  50%      { transform: rotate(1.3deg) translateY(-3px); }
-}
-/* cánh sen vẽ dần (stroke-dashoffset) + hoa "bloom" khi vào viewport */
-.lotus-branch .lb-petal { stroke-dasharray: 130; stroke-dashoffset: 130; }
-.lotus-branch.is-visible .lb-petal { animation: lotusDraw 1.8s cubic-bezier(.22,.61,.36,1) forwards; }
-.lotus-branch .lb-bloom { transform-box: fill-box; transform-origin: 50% 100%; }
-.lotus-branch.is-visible .lb-bloom { animation: lbBloom 1.4s cubic-bezier(.22,.61,.36,1) both; }
-.lotus-branch.is-visible .lb-bloom .lb-petal:nth-child(1) { animation-delay: .10s; }
-.lotus-branch.is-visible .lb-bloom .lb-petal:nth-child(2) { animation-delay: .22s; }
-.lotus-branch.is-visible .lb-bloom .lb-petal:nth-child(3) { animation-delay: .34s; }
-.lotus-branch.is-visible .lb-bloom .lb-petal:nth-child(4) { animation-delay: .46s; }
-.lotus-branch.is-visible .lb-bloom .lb-petal:nth-child(5) { animation-delay: .58s; }
-@keyframes lbBloom {
-  from { transform: scale(.62); opacity: .25; }
-  to   { transform: scale(1); opacity: 1; }
+@keyframes lotusFloatGlow {
+  0%, 100% { transform: translateY(0);
+    filter: saturate(0.97) brightness(1.07) contrast(0.98) drop-shadow(0 18px 40px rgba(162,131,90,0.22)); }
+  50%      { transform: translateY(-8px);
+    filter: saturate(1.0) brightness(1.12) contrast(0.98) drop-shadow(0 26px 54px rgba(216,184,136,0.32)); }
 }
 
 /* =========================================================
@@ -620,10 +600,8 @@ img { max-width: 100%; display: block; }
   50%      { filter: sepia(0.16) saturate(0.94) brightness(1.12) contrast(0.96); }
 }
 
-/* Reduced-motion: tắt sway/bloom/glow, hiện static (đã có khối * ở trên xử lý phần lớn) */
+/* Reduced-motion: tắt float/glow, hiện static (đã có khối * ở trên xử lý phần lớn) */
 @media (prefers-reduced-motion: reduce) {
-  .lotus-branch-sway { animation: none; }
-  .lotus-branch .lb-petal { stroke-dashoffset: 0; }
-  .lotus-branch .lb-bloom { transform: none; opacity: 1; }
-  .visit-buddha-photo { animation: none; }
+  .story-lotus-photo img,
+  .visit-buddha-photo img { animation: none; }
 }

@@ -37,8 +37,9 @@ project-root/
 │  ├─ references/             ← xanh-phu-quy.png (reference màu emerald)
 │  ├─ menu/                   ← README.md + ảnh món ăn thật (thêm sau)
 │  ├─ feedback/               ← README.md + fb_1..fb_5.jpg (ảnh đánh giá thật — accordion Reviews)
-│  ├─ banner/                 ← banner_1.jpg, banner_2.jpg (ảnh hero thật — Prompt 06)
-│  └─ adidaphat.jpg           ← ảnh thật Đức Phật, DÙNG làm ambience bên phải Visit (Prompt 06)
+│  ├─ banner/                 ← banner_1.jpg, banner_2.jpg, banner_3.jpg (ảnh hero thật, 4 slide)
+│  ├─ adidaphat.jpg           ← ảnh thật Đức Phật, ambience bên phải Visit
+│  └─ hoasen.jpg              ← ảnh thật hoa sen, ambience vùng chuyển Hero → Story (Prompt 07)
 ├─ docs/
 │  ├─ project/                ← PROJECT_STRUCTURE_SANITE.md, SANITE_WORK_HISTORY_2026-06-13.md
 │  ├─ criteria/               ← tieu_chi_landingpage.md, tieu_chi_landing_page.docx
@@ -82,13 +83,14 @@ Mọi component/hook export qua `Object.assign(window, {...})` ở cuối mỗi 
 - KHÔNG tạo `src` giả / KHÔNG ảnh internet cho món ăn.
 - Menu image chỉ hiện khi field `image` có đường dẫn thật. Rỗng → KHÔNG render `<img>`, không broken image.
 - Thêm ảnh món: bỏ file vào `assets/menu/` theo `assets/menu/README.md`, điền field `image` trong `MENU_ITEMS` (`src/sections/sections-b.jsx`).
-- Hero slider dùng mảng `HERO_SLIDES` trong `src/sections/sections-a.jsx`. Chỉ thêm ảnh từ `assets/gallery/hero/` hoặc `assets/banner/` nếu file thật đã tồn tại. **Prompt 06:** đã thêm `assets/banner/banner_1.jpg` + `banner_2.jpg` (3 slide → autoplay + crossfade + dots). Overlay hero đã chuyển tông **sáng** (veil kem/gold + emerald nhẹ góc dưới trái), ảnh `brightness(1.05)`; không dùng emerald đậm gây tối.
+- Hero slider dùng mảng `HERO_SLIDES` trong `src/sections/sections-a.jsx`. Chỉ thêm ảnh từ `assets/gallery/hero/` hoặc `assets/banner/` nếu file thật đã tồn tại. **Prompt 07:** 4 slide (interior + banner_1/2/3, banner đã nâng lên 1080×1350 = đúng tỉ lệ 4/5), autoplay + crossfade + 4 dots. `HERO_SLIDE_INTERVAL_MS = 3600` (nhanh hơn, từ 5400), crossfade `.hero-slide` ~0.95s + Ken Burns ~4s. Overlay tông **sáng** (veil kem/gold + emerald nhẹ góc dưới trái), ảnh `brightness(1.05)`. Reduced-motion tắt autoplay; pause khi hover/focus; dots click chuyển.
 - **Feedback accordion (Prompt 05):** ảnh đánh giá thật ở `assets/feedback/fb_(số).jpg`; chỉ liệt kê file thật trong mảng `FEEDBACK_IMAGES` (`src/sections/sections-c.jsx`). 1 ảnh → 1 card lớn; 2–5 ảnh → accordion; >5 → lấy 5 ảnh đầu. Ảnh lỗi `onError` tự ẩn (KHÔNG ảnh giả). Mảng rỗng → fallback review card chữ, không broken image. Quy tắc tên/nguồn/kích thước trong `assets/feedback/README.md`. Tuyệt đối không dùng ảnh internet/Unsplash/placeholder.
 
-## 6b. Quy tắc ornament & visual (cập nhật Prompt 06)
-- **Lotus branch (Hero→Story transition):** component `LotusBranch` ở `src/hooks/hooks.jsx`, render `<LotusBranch className="story-lotus-branch story-lotus-branch-featured" />` trong `StorySection`. Inline SVG (gold/emerald/hồng sen trầm), gió đung đưa nhẹ (sway, tâm xoay ở gốc cành), hoa bloom khi vào viewport. **Prompt 06:** phóng lớn (`width clamp(220–340px)`) + đặt ở vùng chuyển giữa Hero và Story (`top` âm để vươn lên), opacity ~0.78, glow kem/gold sau hoa. `.story` đổi `overflow:visible` (cành vươn lên); chống tràn ngang nhờ `body{overflow-x:hidden}` + `left` dương. `aria-hidden` + `pointer-events:none`, `z-index:0`.
+## 6b. Quy tắc ornament & visual (cập nhật Prompt 07)
+- **Lotus photo (Hero→Story transition):** Prompt 07 **bỏ render SVG `LotusBranch`** (component vẫn còn trong `hooks.jsx` nhưng KHÔNG dùng — không ảnh hưởng runtime), thay bằng **ảnh thật** `assets/hoasen.jpg` qua `<div className="story-lotus-photo story-lotus-photo-featured"><img alt="" aria-hidden/></div>` trong `StorySection`. Hòa nền: `object-fit:contain` + `mask-image` radial (mờ rìa) + filter ấm + `drop-shadow` gold glow; float nhẹ + glow breathe; opacity ~0.7 (mobile 0.68–0.72). Đặt ở vùng chuyển (`top` âm để vươn lên từ Hero), `z-index:0`, `pointer-events:none`. `.story` giữ `overflow:visible`; chống tràn ngang nhờ `body{overflow-x:hidden}`. Không che heading/CTA.
 - **Buddha photo (Visit):** Prompt 06 **bỏ SVG `BuddhaOrnament`**, dùng **ảnh thật** `assets/adidaphat.jpg` qua `<div className="visit-buddha-photo"><img alt="" aria-hidden/></div>` bên phải `VisitSection`. Hòa nền bằng `object-fit:contain` + `mask-image` radial (mờ rìa) + filter ấm (`sepia/brightness`), opacity ~0.3 (mobile thấp hơn), `z-index:0` < `.wrap`, `pointer-events:none`; breathing glow qua `brightness`. `.visit` giữ `overflow:hidden`. Không che CTA "Xem đường đi"/Call/Maps.
-- **Feedback images = `object-fit: contain`** (Prompt 06): ảnh review (screenshot dọc) hiển thị **trọn**, không crop chữ; khung kem/emerald + caption chip nhỏ; active card rộng (`flex-grow 5.2`, accordion cao 520px); mobile scroll cards `aspect-ratio 3/4` cũng contain. KHÔNG dùng `cover` cho feedback.
+- **Feedback images = `object-fit: contain` (full max — Prompt 07):** cấu trúc `.fb-item` = `.fb-image-shell` (ảnh contain, padding 8px) + `.fb-caption-bar` (caption nằm DƯỚI ảnh, không che review). Accordion cao `clamp(560–680px)`, active `flex-grow 6.5` (ảnh review hiện lớn nhất có thể, xem trọn), inactive min-width 58px. Mobile: scroll cards `flex-basis 74–90vw`, cao `min(70–72vh, 640–660px)`, contain. KHÔNG dùng `cover`/overlay che ảnh.
+- **Mobile ornament visibility (Prompt 07):** hoa sen + Đức Phật phải VẪN thấy trên mobile — tăng opacity (lotus ~0.68, buddha ~0.22) + `drop-shadow` glow; Buddha chuyển lên **góc phải trên** Visit (tránh bị map-card đậm che ở đáy). Không che text/CTA, không overflow ngang.
 - **Icon sizing (Prompt 06):** token `--icon-sm:15px / --icon-md:18px / --icon-lg:24px` (index.css); leaf/arrow/copy icon tăng nhẹ qua CSS scope (`.fc-eyebrow svg`, `.story-sign svg`, `.mc-more svg`, `.info-link svg`, `.pill svg`, `.dish-close svg`…), không phá button/nav.
 - Tất cả: mobile giảm kích thước/opacity; `prefers-reduced-motion` tắt sway/bloom/glow, hiện static. KHÔNG ảnh internet/placeholder; chỉ trỏ file thật tồn tại.
 
