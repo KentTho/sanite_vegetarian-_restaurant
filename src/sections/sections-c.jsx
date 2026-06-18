@@ -29,7 +29,7 @@ function SpaceGallery() {
 
         <div className="space-foot">
           <Reveal as="p" className="space-caption">
-            Vòm tường mềm, ánh đèn vàng, bàn gỗ và ghế mây tạo cảm giác ấm, nhẹ và riêng tư.
+            Không gian sang trọng, ánh đèn vàng, bàn gỗ và ghế mây tạo cảm giác ấm, nhẹ và riêng tư.
           </Reveal>
           <Reveal delay={120} as="blockquote" className="space-quote">
             “Không gian ấm áp, riêng tư giành cho bạn và người thương”
@@ -44,7 +44,7 @@ function SpaceGallery() {
 const REVIEWS = [
   { q: 'Decor xinh, hiện đại mà vẫn nhẹ nhàng.', l: 'Không gian' },
   { q: 'Bày trí đẹp, lịch sự, ấm áp và dễ chịu.', l: 'Vibe' },
-  { q: 'Nhân viên vui vẻ, gợi ý món rất kiên nhẫn.', l: 'Dịch vụ' },
+  { q: 'Nhân viên thân thiện.', l: 'Dịch vụ' },
   { q: 'Món chay đậm đà, sáng tạo từ nấm và rau củ.', l: 'Ẩm thực' },
 ];
 
