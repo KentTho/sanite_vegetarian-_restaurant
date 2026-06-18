@@ -129,16 +129,16 @@ const MENU_ITEMS = [
     note: 'Món dễ làm khách không ăn chay trường thấy bất ngờ.'
   },
   {
-    id: 'dau-hu-sot-tac', category: 'Khai vị', name: 'Đậu hũ sốt tắc',
+    id: 'banh-duc-chay', category: 'Khai vị', name: 'Bánh Đúc Chay',
     description: 'Chua ngọt hài hòa, mở vị nhẹ nhàng.',
-    image: '', imageAlt: 'Đậu hũ sốt tắc tại Sanité',
-    detail: 'Đậu hũ mềm phủ sốt tắc chua ngọt thanh, hợp để bắt đầu bữa ăn.'
+    image: 'assets/menu/banh-duc-chay.jpg', imageAlt: 'Bánh Đúc Chay tại Sanité',
+    detail: 'Bánh đúc được làm từ nước cốt dừa tươi 🥥 nên cốt bánh mềm mịn, thơm dịu. Phần nhân nấm xào cùng rau củ 🥕🍄 dậy mùi đậm đà vừa đủ, ăn kèm nước mắm chay pha từ nước dừa xiêm tươi mang đến vị chua – cay – mặn – ngọt hài hòa, thanh mát 💧'
   },
   {
-    id: 'rau-cu-kho-quet-chay', category: 'Khai vị', name: 'Rau củ kho quẹt chay',
+    id: 'goi-sun-tac', category: 'Khai vị', name: 'Gỏi Sụn Tắc',
     description: 'Vị Việt thân quen, hợp để chia sẻ.',
-    image: '', imageAlt: 'Rau củ kho quẹt chay tại Sanité',
-    detail: 'Rau củ tươi chấm kho quẹt chay đậm đà, gợi cảm giác bữa cơm nhà.'
+    image: 'assets/menu/goi-sun-tac.webp', imageAlt: 'Rau củ kho quẹt chay tại Sanité',
+    detail: 'Rong sụn, ớt chuông, bắp chuối, đậu phộng & mè trắng.'
   },
 
   // --- Món chính ---
@@ -157,34 +157,34 @@ const MENU_ITEMS = [
   {
     id: 'pad-thai-chay', category: 'Món chính', name: 'Pad Thái chay',
     description: 'Mì xào kiểu Thái, chua cay nhẹ.',
-    image: '', imageAlt: 'Pad Thái chay tại Sanité',
+    image: 'assets/menu/pad-thai-chay.jpg', imageAlt: 'Pad Thái chay tại Sanité',
     detail: 'Mì xào kiểu Thái đậm vị vừa phải, giữ tinh thần chay sáng tạo.'
   },
   {
     id: 'com-chien-sanite', category: 'Món chính', name: 'Cơm chiên Sanité',
     description: 'Món cơm thân thuộc cho nhóm khách.',
-    image: '', imageAlt: 'Cơm chiên Sanité',
+    image: 'assets/menu/com-chien-sanite.jpg', imageAlt: 'Cơm chiên Sanité',
     detail: 'Cơm chiên thơm tơi cùng rau củ, dễ gọi khi đi cùng gia đình hoặc bạn bè.'
   },
 
   // --- Món nấm ---
   {
-    id: 'hau-chay-tu-nam', category: 'Món nấm', name: 'Hàu chay từ nấm',
+    id: 'chan-nam-la-han-xao-sa-te', category: 'Món nấm', name: 'Chân Nấm La Hán Xào Sa Tế',
     description: 'Kết cấu thú vị, vị chay mới lạ.',
-    image: '', imageAlt: 'Hàu chay từ nấm tại Sanité',
-    detail: 'Món nấm sáng tạo, gợi kết cấu hàu theo cách chay nhẹ nhàng.'
+    image: 'assets/menu/chan-nam-la-han-xao-sa-te.png', imageAlt: 'Chân Nấm La Hán Xào Sa Tế tại Sanité',
+    detail: 'Saigon những ngày mưa này, còn gì tuyệt vời hơn khi được thưởng thức một bữa cơm nóng hổi, nghi ngút hương nồng từ gừng, sả, ớt, ngũ vị kết hợp với các loại nấm, rau, củ, quả xanh sạch, giúp bạn đánh thức giác quan, xua tan sự mệt mỏi của cơ thể và hơn nữa, là một sự trải nghiệm mới mẻ tại Sanité, gần gũi và thân thuộc như đang dùng bữa tại ngôi nhà thương yêu của mình.'
   },
   {
-    id: 'thit-bo-chay-tu-nam', category: 'Món nấm', name: 'Thịt bò chay từ nấm',
-    description: 'Đậm vị, dễ mời người mới ăn chay.',
-    image: '', imageAlt: 'Thịt bò chay từ nấm tại Sanité',
-    detail: 'Vị đậm và kết cấu gần gũi, thường hợp khi dẫn người quen ăn mặn cùng đi.'
+    id: 'dau-hu-nam-kho-mang', category: 'Món nấm', name: 'Đậu Hũ Nấm Kho Măng',
+    description: 'Ẩm Thực Chay Thanh Đạm – Hương Sắc Măng Rừng Tự Nhiên.',
+    image: 'assets/menu/dau-hu-nam-kho-mang.jpg', imageAlt: 'Đậu Hũ Nấm Kho Măng tại Sanité',
+    detail: 'Măng rừng tự nhiên từ Bà Rịa – những búp măng non được thu hái cẩn thận và phơi khô theo phương pháp truyền thống, không qua ngâm tẩm hóa chất bảo quản. Nhờ vậy, măng giữ được độ vị ngọt tự nhiên và hàm lượng dinh dưỡng cao, an toàn hơn so với măng thường.'
   },
   {
-    id: 'nam-bao-ngu-chien-muoi-tieu', category: 'Món nấm', name: 'Nấm bào ngư chiên muối tiêu', featured: true,
+    id: 'nam-dui-ga-boc-banh-da', category: 'Món nấm', name: 'Nấm Đùi Gà Bọc Bánh Đa', featured: true,
     description: 'Nấm bào ngư giòn nhẹ, áo muối tiêu kiểu Hong Kong.',
-    image: '', imageAlt: 'Nấm bào ngư chiên muối tiêu kiểu Hong Kong tại Sanité',
-    detail: 'Nấm bào ngư chiên giòn, áo lớp muối tiêu thơm kiểu Hong Kong, ăn nóng rất cuốn.'
+    image: 'assets/menu/nam-dui-ga-boc-banh-da.jpg', imageAlt: 'Nấm đùi gà bọc bánh đa tại Sanité',
+    detail: 'Nấm đùi gà, bánh đa, bánh phồng, hành tím (kèm rau càng cua & sốt tương tắc).'
   },
 
   // --- Lẩu / Xúp ---
@@ -197,7 +197,7 @@ const MENU_ITEMS = [
   {
     id: 'lau-sa-te-chay', category: 'Lẩu / Xúp', name: 'Lẩu sa tế chay',
     description: 'Nước lẩu sa tế ấm, hợp để chia sẻ.',
-    image: '', imageAlt: 'Lẩu sa tế chay tại Sanité',
+    image: 'assets/menu/lau-sa-te-chay.png', imageAlt: 'Lẩu sa tế chay tại Sanité',
     detail: 'Nước lẩu cay ấm dùng cùng nấm và rau củ tươi, hợp cho nhóm bạn hoặc gia đình.'
   },
   {
@@ -229,10 +229,10 @@ const MENU_ITEMS = [
 
   // --- Tráng miệng ---
   {
-    id: 'banh-creme-brulee', category: 'Tráng miệng', name: 'Bánh Crème Brûlée', featured: true,
-    description: 'Crème Brûlée ngọt dịu, lớp đường khò giòn.',
-    image: '', imageAlt: 'Bánh Crème Brûlée tại Sanité',
-    detail: 'Lớp kem trứng mềm mịn, mặt đường khò giòn rụm, kết bữa nhẹ nhàng và vừa ngọt.'
+    id: 'che-troi-nuoc', category: 'Tráng miệng', name: 'Chè Trôi Nước Ngọt Lành', featured: true,
+    description: 'Chè trôi nước, biểu trưng cho sự viên mãn, trôi chảy và hanh thông.',
+    image: 'assets/menu/che-troi-nuoc.jpg', imageAlt: 'Chè Trôi Nước Ngọt Lành tại Sanité',
+    detail: 'Được bếp Sanité chế biến dẻo thơm, vị ngọt thanh quyện cùng gừng ấm nóng. Mỗi bát chè là lời gửi gắm ước nguyện một năm mới bình an và đủ đầy cho gia đình trong mâm cỗ tiễn Ông Táo về Trời.'
   },
 ];
 const MENU_CATS = MENU_ITEMS.reduce((acc, m) => (acc.includes(m.category) ? acc : [...acc, m.category]), []);
