@@ -240,8 +240,8 @@ const SANITE_BRANCHES = [
   {
     id: 'quan-3',
     name: 'Sanité Chay Quận 3',
-    shortName: 'Quận 3',
-    label: 'Trụ sở chính',
+    shortName: 'Ngay',
+    label: 'Chi nhánh chính',
     address: '2B Hồ Xuân Hương, Xuân Hòa, Quận 3, Hồ Chí Minh',
     phone: '+84 962 106 679',
     phoneHref: 'tel:+84962106679',
@@ -254,7 +254,7 @@ const SANITE_BRANCHES = [
   {
     id: 'phu-nhuan',
     name: 'Sanité Chay Phú Nhuận',
-    shortName: 'Phú Nhuận',
+    shortName: 'Ngay',
     label: 'Không gian rộng hơn',
     address: '46 Trương Quốc Dung, Phường 10, Phú Nhuận, Hồ Chí Minh',
     phone: '+84 978 323 232',
